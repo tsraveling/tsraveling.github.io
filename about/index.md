@@ -1,37 +1,15 @@
 ---
 layout: page
-title: About the Theme
-tags: [about, Jekyll, theme, moon]
-date: 2016-03-21
+title: About Tim Raveling
+tags: [about, raveling, consulting, swift, ios]
+date: 2017-06-21
 comments: false
 ---
     
-<center><a href="http://taylantatli.github.io/Moon"><b>Moon</b></a> is a minimal, one column jekyll theme.</center>
+**I’m a senior iOS developer with seven years of iOS experience,** and ten years of professional programming experience, although programming has been a passion of mine since the first time I opened QBasic at the age of eleven on my parents’ ancient monochrome DOS machine.
 
-## Features
-* Minimal, you can focus on your content
-* Responsive
-* Disqus integration
-* Syntax highlighting
-* Optional post image
-* Social icons
-* Page for sharing projects
-* Optional background image
-* Simple navigation menu
-* MathJax support
+I consider programming to be a craft, and like to make sure my code is **clean, elegant, well-commented, modular, and scalable.** When presented with a projected inherited from a previous developer that’s full of patchwork solutions and baling-twine engineering, I generally prefer to start with a clean slate and build solid from the ground up. Code architecture is the foundation upon which your app or website rests; failing to invest in it is challenging fate.
 
-## Preview
+While my primary professional focus is in **iOS** with **Objective-C and Swift,** I’m also fluent in **Java, PHP, CSS, vanilla JS, jQuery, Python, C# and C++.** I’m also currently in the process of picking up node.js.
 
-{% capture images %}
-    https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png
-    https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png
-{% endcapture %}
-{% include gallery images=images caption="Screenshots of Moon Theme" cols=2 %}
-
-See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub.
-
-## Getting Started
-
-To learn how to install and use this theme check out the [Setup Guide](http://taylantatli.me/Moon/moon-theme/) for more information.
-      
-[Install Moon](https://github.com/TaylanTatli/Moon){: .btn}
+In addition to my [consulting business](/consulting), I’m also **currently available for hire.** Check out my [portfolio projects](/projects) for examples of my work, and [contact me](mailto:tsraveling@gmail.com) if you’d like to set up a time to meet.
