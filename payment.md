@@ -4,6 +4,10 @@ title: $249.99 Technical Consult
 comments: false
 ---
 
+<script>
+fbq('track', 'InitiateCheckout');
+</script>
+
 <div class="pay-box">
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
