@@ -15,4 +15,4 @@ If that sounds good to you, I'm offering **a consulting package for $249.99** wh
 - **45 minute meeting** via Skype or phone where I review your idea in detail and explain what it will take to implement, as well as answer any technical questions you might have
 - One-page **bulleted brief sheet** containing all the important information covered in the call
 
-<a href="https://calendly.com/tsraveling/ios-consultation" class="schedule-consult">$249.99: Book now</a>
+<a href="mailto:tsraveling@gmail.com" class="schedule-consult">$249.99: Book now</a>
