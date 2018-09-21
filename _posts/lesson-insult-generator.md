@@ -1,3 +1,14 @@
+---
+layout: page
+title:  "Project 1: Insult Generator"
+date:   2018-09-21
+excerpt: "Create a small Javascript function that generates random insults. We're just looking to get the text for now; actually using and displaying the insults can come later."
+project: false
+tag:
+- javascript
+- tutorial
+comments: false
+---
 
 # Lesson 1: Insult Generator
 
