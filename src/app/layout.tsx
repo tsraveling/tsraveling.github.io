@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { generatePostsData } from "@/lib/posts/generator";
+import { PostsProvider } from "@/context/PostsContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +25,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const postsData = generatePostsData();
+  console.log(">>> postsData:", postsData);
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <PostsProvider value={postsData}>{children}</PostsProvider>
       </body>
     </html>
   );
