@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "static-dev": "next build && npx serve out"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

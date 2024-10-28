@@ -1,6 +1,12 @@
+"use client";
+
+import { usePosts } from "@/context/PostsContext";
 import Image from "next/image";
 
 export default function Home() {
+  const { posts, categories, recent } = usePosts();
+  console.log(">>> posts:", posts);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -8,7 +14,10 @@ export default function Home() {
           the future home of tsraveling.com
         </h1>
         <p className="text-lg text-center w-full">
-          This site is currently under construction.
+          This site is currently under construction. But the posts we have are:
+          <ul>
+            <li></li>
+          </ul>
         </p>
       </main>
       <footer className="row-start-3 text-sm text-gray-500">
