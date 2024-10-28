@@ -1,0 +1,32 @@
+{
+  "posts": {
+    "test-one": {
+      "slug": "test-one",
+      "title": "Test One (The Bigfoot)",
+      "category": "games",
+      "date": "2024-10-25",
+      "content": "\nBigfoot, also commonly referred to as Sasquatch, is a large, hairy mythical creature said to inhabit forests in North America, particularly in the Pacific Northwest. Bigfoot is featured in both American and Canadian folklore, and since the mid-20th century has grown into a cultural icon, permeating popular culture and becoming the subject of its own distinct subculture.\n",
+      "mentions": [],
+      "mentionedBy": [],
+      "wordCount": 57,
+      "readingTime": 1,
+      "excerpt": "Bigfoot, also commonly referred to as Sasquatch, is a large, hairy mythical creature said to inhabit forests in North America, particularly in the Pacific Nort..."
+    },
+    "test-two": {
+      "slug": "test-two",
+      "title": "Test Two (Yetis)",
+      "category": "systems",
+      "date": "2024-10-23",
+      "content": "\nThe Yeti is an ape-like creature purported to inhabit the Himalayan mountain range in Asia. In Western popular culture, the creature is commonly referred to as the Abominable Snowman. Many dubious articles have been offered in an attempt to prove the existence of the Yeti, including anecdotal visual sightings, disputed video recordings, photographs, and plaster casts of large footprints. Some of these are speculated or known to be hoaxes.\n",
+      "mentions": [],
+      "mentionedBy": [],
+      "wordCount": 69,
+      "readingTime": 1,
+      "excerpt": "The Yeti is an ape-like creature purported to inhabit the Himalayan mountain range in Asia. In Western popular culture, the creature is commonly referred to as..."
+    }
+  },
+  "categories": {
+    "games": ["test-one"],
+    "systems": ["test-two"]
+  }
+}
