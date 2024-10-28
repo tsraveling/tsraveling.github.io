@@ -14,6 +14,14 @@ export default function Home() {
         <p className="text-lg text-center w-full">
           This site is currently under construction. But the posts we have are:
         </p>
+        <h2>Recent posts:</h2>
+        <ul>
+          {recentPosts.map((post) => (
+            <li>
+              <a href={"/" + post.slug}>{post.title}</a>
+            </li>
+          ))}
+        </ul>
       </main>
       <footer className="row-start-3 text-sm text-gray-500">
         Thanks for stopping by
