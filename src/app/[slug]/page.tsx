@@ -1,5 +1,6 @@
 import React from "react";
 import postsData, { getPost } from "../../lib/PostData";
+import ReactMarkdown from "react-markdown";
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -12,7 +13,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         <h1 className="text-4xl font-bold text-center w-full">
           {thisPost?.title}
         </h1>
-        <p className="text-lg text-center w-full">{thisPost?.content}</p>
+        <ReactMarkdown>{thisPost?.content}</ReactMarkdown>
       </main>
       <footer className="row-start-3 text-sm text-gray-500">
         Thanks for stopping by
