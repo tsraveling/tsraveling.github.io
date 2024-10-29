@@ -12,7 +12,7 @@
   --highlight: 234 179 8; /* yellow-500 */
 }
 
-.dark {
+[data-theme="dark"] {
   /* Dark theme */
   --background: #0f1822ff;
   --background-alt: #0f1822ff;
