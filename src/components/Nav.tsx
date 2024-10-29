@@ -47,9 +47,7 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
       )}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          tsraveling.com
-        </a>
+        <a href="/">tsraveling.com</a>
 
         <button
           data-collapse-toggle="navbar-default"
