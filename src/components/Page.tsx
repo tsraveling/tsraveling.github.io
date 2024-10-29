@@ -23,16 +23,18 @@ const Page: React.FC<PageProps> = ({ title, date, children }) => {
 
   return (
     <main>
-      <article>
+      <article className="prose prose-lg pt-5 max-w-3xl mx-auto">
         <h1>{title}</h1>
         <p>
-          <time
-            data-pubdate="pubdate"
-            data-datetime={dateCode}
-            title={fullDate}
-          >
-            Feb. 8, 2022
-          </time>
+          <em>
+            <time
+              data-pubdate="pubdate"
+              data-datetime={dateCode}
+              title={fullDate}
+            >
+              Feb. 8, 2022
+            </time>
+          </em>
         </p>
         {children}
       </article>

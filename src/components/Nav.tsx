@@ -41,7 +41,7 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
   return (
     <nav
       className={clsx(
-        "fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md z-50",
+        "fixed top-0 bg-background-alt left-0 w-full shadow-md z-50",
         showOnlyOnHover &&
           "opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out"
       )}
