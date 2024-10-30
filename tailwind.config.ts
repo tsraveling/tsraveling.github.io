@@ -9,6 +9,9 @@ const config: Config = {
   darkMode: "class",
   theme: {
     extend: {
+      fonts: {
+        clarendon: ["Clarendon", "serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
