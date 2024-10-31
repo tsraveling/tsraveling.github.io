@@ -2,6 +2,14 @@
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
+import {
+  BlueSkyIcon,
+  BookmarkIcon,
+  DarkModeIcon,
+  HomeIcon,
+  LightModeIcon,
+  TwitterIcon,
+} from "./Icons";
 
 const NavLink: React.FC<{ href: string; title: string }> = ({
   href,
@@ -63,8 +71,14 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
             <NavLink href="/" title="Home" />
             <NavLink href="/" title="About" />
             <NavLink href="/" title="Contact" />
-            {mounted && <button onClick={() => toggleTheme()}>{theme}</button>}
           </ul>
+          <BlueSkyIcon />
+          <TwitterIcon />
+          <DarkModeIcon />
+          <LightModeIcon />
+          <HomeIcon />
+          <BookmarkIcon />
+          {mounted && <button onClick={() => toggleTheme()}>{theme}</button>}
         </div>
       </div>
     </nav>
