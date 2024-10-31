@@ -14,13 +14,22 @@ const config: Config = {
       },
       colors: {
         background: "var(--background)",
+        backgroundAlt: "var(--background-alt)",
         foreground: "var(--foreground)",
       },
       typography: {
         DEFAULT: {
-          css: {
-            fontWeight: "500",
-            color: "var(--text)",
+          css: {},
+        },
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/typography")],
+};
+export default config;
+
+/*
+color: "var(--text)",
             a: {
               color: "#3182ce",
               "&:hover": {
@@ -30,11 +39,4 @@ const config: Config = {
             h1: {
               color: "var(--text)",
             },
-          },
-        },
-      },
-    },
-  },
-  plugins: [require("@tailwindcss/typography")],
-};
-export default config;
+             */
