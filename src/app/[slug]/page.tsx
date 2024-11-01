@@ -5,8 +5,13 @@ import Nav from "@/components/Nav";
 import Page from "@/components/Page";
 import Main from "@/components/Main";
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
+export default async function Post({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const thisPost = getPost(slug);
 
   // TODO: redirect to 404
