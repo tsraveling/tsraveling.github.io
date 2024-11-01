@@ -19,10 +19,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <Main>
-      <Nav />
-      <Page title={thisPost.title} date={postDate}>
+      <Page className="pt-11 md:pt-0" title={thisPost.title} date={postDate}>
         <ReactMarkdown>{thisPost?.content}</ReactMarkdown>
       </Page>
+      <Nav />
     </Main>
   );
 }
