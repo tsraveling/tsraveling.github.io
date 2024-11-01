@@ -2,20 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Clarendon Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Clarendon Regular"),
+    url("/fonts/Clarendon Regular.woff") format("woff");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Caslon";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Caslon"), url("/fonts/adobe-caslon-pro.woff") format("woff");
 }
+
+@font-face {
+  font-family: "Garamond";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Garamond"), url("/fonts/EBGaramond-Reg.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rockwell";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Rockwell"), url("/fonts/ROCK.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rockwell";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Rockwell Bold"),
+    url("/fonts/Rockwell-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Sabon";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Sabon"), url("/fonts/Sabon.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Trajan";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Trajan"), url("/fonts/TrajanPro-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Avant Garde";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Avant Garde"), url("/fonts/AVGARDN_2.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bodoni";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Bodoni"), url("/fonts/bodoni.ttf") format("truetype");
+}
+
+:root {
+  --background: 255 255 255; /* white */
+  --background-alt: 243 244 246; /* gray-100 */
+  --background-page: 249 250 251; /* gray-50 */
+  --background-hover: 229 231 235; /* gray-200 */
+  --text: 17 24 39; /* gray-900 */
+  --text-muted: 107 114 128; /* gray-500 */
+  --highlight: 234 179 8; /* yellow-500 */
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --background: #0f1822ff;
+  --background-alt: #0f1822ff;
+  --background-page: #2a1f1fff;
+  --background-hover: #663422ff;
+  --text: #f5f4f0;
+  --text-muted: #e5e4d9;
+  --highlight: #8b6556ff;
+}
+
+/* Georgia | Caslon | Garamond | Clarendon | Rockwell | Sabon | Trajan */
 
 body {
-  color: var(--foreground);
+  color: var(--text);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Rockwell", sans-serif;
 }
