@@ -10,11 +10,16 @@ const MarginSpacer = () => <div className="flex-1" />;
  */
 const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="min-h-screen p-8 pb-20 bg-stone-50 dark:bg-stone-950 flex">
-      <MarginSpacer />
-      {children}
-      <MarginSpacer />
-    </div>
+    <>
+      <main className="min-h-screen p-8 pb-20 bg-stone-50 dark:bg-stone-950 flex">
+        <MarginSpacer />
+        {children}
+        <MarginSpacer />
+      </main>
+      <footer className="flex align-middle justify-center">
+        <div className="py-3 text-sm text-stone-500">© 2024 Tim Raveling.</div>
+      </footer>
+    </>
   );
 };
 

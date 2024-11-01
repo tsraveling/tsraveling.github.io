@@ -12,40 +12,38 @@
       "readingTime": 2,
       "excerpt": "Nonviolent action is still the threat of violence, usually against a group not sure of its power in the area of effect, and uncertain of the moral support of i..."
     },
-    "test-one": {
-      "slug": "test-one",
-      "title": "Test One (The Bigfoot)",
+    "puzzle-notes": {
+      "slug": "puzzle-notes",
+      "title": "Notes: Puzzles",
       "category": "games",
-      "date": "2024-10-25",
-      "content": "\nBigfoot, also commonly referred to as Sasquatch, is a large, hairy mythical creature said to inhabit forests in North America, particularly in the Pacific Northwest. Bigfoot is featured in both American and Canadian folklore, and since the mid-20th century has grown into a cultural icon, permeating popular culture and becoming the subject of its own distinct subculture.\n\nTweaking this!\n",
+      "date": "2024-11-1",
+      "content": "\n## GMTK: Catch and Revelations\n\nFrom [GMTK's video on puzzle design](https://www.youtube.com/watch?v=zsjC6fa_YBg&t=361s):\n\n- Present the problem, the tool, and the \"catch\" -- why the obvious application of the tool will not work. Then let the player figure out the un-obvious application, resulting in the **revelation.**\n- This relies on an **assumption**, i.e., that you already know how the tool should be applied. Often, the game will teach you the \"right\" way, thus establishing the assumption that you then have to **subvert** as the player.\n- Luring the player into an easy up-front assumption prevents the player from being overwhelmed -- they think they know the solution, realize they don't, but are already invested, so they keep tweaking it to try to figure it out.\n- The revelation then **teaches** the player a deeper complexity present within the system, opening up their eyes to the potential it has.\n\nAll of this only works with clear communication:\n\n- Hints: make it hard to figure out, but lead the player in the right direction to avoid frustration.\n- Avoid \"false positives\" -- circumstances that make it look like if you jumped just a little higher or ran a little faster, you could make it.\n- Build on other puzzles. Lessons you learned in puzzle one should play forward to the next one.\n\n## Jonas Tyroller: 5 Steps\n\n1. Set up some random rules, e.g. in a paper prototype. For instance, \"you can only flip cards over in a line.\" No objectives yet.\n2. Experiment with adding objectives and iterate on the ruleset. Ideally at this point you are familiar with your rules and hopefully know what might be challenging or interesting.\n3. Learn alongside the player -- design incrementally harder puzzles.\n4. Expand the ruleset as you go -- but only if you have fully explored the previous ones!\n5. Reorder and polish (nothing is perfect from jump).\n\n- In a good puzzle game, actions have predictable consequences.\n- Experimentation pays off -- take your time.\n- The first level should teach the player the basics.\n- A good puzzle includes all the information needed to solve it.\n- Sometimes you can design puzzles backward. Start at the desired end state and then add complications in from there.\n- A good puzzle never _fails_ to teach you something new about the game system.\n- You might be able to toss in some random configurations and see if there is anything interesting or hard about them, then design from there.\n",
       "mentions": [],
       "mentionedBy": [],
-      "wordCount": 59,
-      "readingTime": 1,
-      "excerpt": "Bigfoot, also commonly referred to as Sasquatch, is a large, hairy mythical creature said to inhabit forests in North America, particularly in the Pacific Nort..."
+      "wordCount": 415,
+      "readingTime": 3,
+      "excerpt": "GMTK: Catch and Revelations\n\nFrom GMTK's video on puzzle design:\n\n- Present the problem, the tool, and the \"catch\" -- why the obvious application of the tool..."
     },
-    "test-two": {
-      "slug": "test-two",
-      "title": "Test Two (Yetis)",
-      "category": "systems",
-      "date": "2024-10-23",
-      "content": "\nThe Yeti is an ape-like creature purported to inhabit the Himalayan mountain range in Asia. In Western popular culture, the creature is commonly referred to as the Abominable Snowman. Many dubious articles have been offered in an attempt to prove the existence of the Yeti, including anecdotal visual sightings, disputed video recordings, photographs, and plaster casts of large footprints. Some of these are speculated or known to be hoaxes.\n",
+    "world-peace": {
+      "slug": "world-peace",
+      "title": "All I Want is World Peace",
+      "category": "politics",
+      "date": "2024-10-30",
+      "content": "\nIt's easy to say we want world peace. But as with so many other things, if we consider what that means, implementation rapidly skews to the radical.\n\nIf we define \"World Peace\" as the elimination of systemetized state violence (ie, war and occupation), then world peace, by definition, would mean:\n\n- An end to all occupation, everywhere: Tibet, Xinjiang, Palestine, Ukraine, Kurdistan, to name a few experiencing active and violent occupations.\n- Reparation of the damages caused by occupations that have otherwise been completed. Both occupations of settlement (like the genocide perpetrated by thee United States against the American peoples), and internal occupations (the erasure of real cultural identities by national monoliths like Russia, Germany, China, Iran, and so on).\n- An end to all coercive labor practices, everywhere. This would require a logistical leveling of the species / planet and likely the complete deconstruction of capitalism, to be replaced by a self-organizing system with an output of sustainability and human care rather than resource concentration and cancerous growth.\n- Eliminations of systemic oppression within human groups. This includes: ethnic oppression, religious oppression, gender oppression, sexual oppression, etc etc: all limitation of human freedom based on identity group membership. This cuts both ways; no one could be _individually_ restricted from practicing their religious rights, but everyone would also be _individually_ protected from religious action. So children and women (for instance) would be protected from patriarchal religous control, even as those religious individuals were protected in their individual religious practice.\n",
       "mentions": [],
       "mentionedBy": [],
-      "wordCount": 69,
-      "readingTime": 1,
-      "excerpt": "The Yeti is an ape-like creature purported to inhabit the Himalayan mountain range in Asia. In Western popular culture, the creature is commonly referred to as..."
+      "wordCount": 249,
+      "readingTime": 2,
+      "excerpt": "It's easy to say we want world peace. But as with so many other things, if we consider what that means, implementation rapidly skews to the radical.\n\nIf we def..."
     }
   },
   "categories": {
     "politics": [
-      "necessity-of-violence"
+      "necessity-of-violence",
+      "world-peace"
     ],
     "games": [
-      "test-one"
-    ],
-    "systems": [
-      "test-two"
+      "puzzle-notes"
     ]
   }
 }

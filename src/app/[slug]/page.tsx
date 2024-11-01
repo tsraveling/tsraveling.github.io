@@ -14,7 +14,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
     return <div>Post not found</div>;
   }
 
-  console.log(">>> post:", thisPost);
   const postDate = new Date(thisPost.date);
 
   return (
