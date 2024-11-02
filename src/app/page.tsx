@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <Main>
-      <div className="max-w-2xl mx-auto flex flex-col align-middle justify-center prose prose-stone">
+      <div className="max-w-2xl mx-auto flex flex-col align-middle justify-center prose prose-stone dark:prose-invert">
         <img
           src="/profile.png"
           alt="Tim Raveling"
