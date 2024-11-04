@@ -10,6 +10,18 @@ import Nav from "@/components/Nav";
 import Page from "@/components/Page";
 import Main from "@/components/Main";
 
+interface ErrorBlockProps {
+  type: string;
+  children: React.ReactNode;
+}
+
+const ErrorBlock = ({ type, children }: ErrorBlockProps) => (
+  <div className="bg-red-500">
+    <em>Invalid {type} code for content:</em>
+    <code>{JSON.stringify(children)}</code>
+  </div>
+);
+
 export default async function Post({
   params,
 }: {
@@ -41,14 +53,25 @@ export default async function Post({
           const projectCode = codeString as string;
           return projectCode ? (
             <iframe
-              className="aspect-video w-full m-0 rounded-md shadow-inner"
+              className="aspect-video w-full m-0 rounded-md shadow-inner mt-4"
               src={`https://tsraveling.github.io/${projectCode}`}
             />
           ) : (
-            <div className="bg-red-500">
-              <em>Invalid project code for content:</em>
-              <code>{JSON.stringify(children)}</code>
-            </div>
+            <ErrorBlock type="project">{children}</ErrorBlock>
+          );
+        case "youtube":
+          const videoCode = codeString as string;
+          return videoCode ? (
+            <iframe
+              className="aspect-video w-full m-0 rounded-md shadow-inner mt-4"
+              src={"https://www.youtube.com/embed/" + videoCode}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              data-referrerpolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <ErrorBlock type="YouTube video">{children}</ErrorBlock>
           );
       }
 

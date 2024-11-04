@@ -14,6 +14,10 @@ this is just a normal code block
 pirate-ship-rules
 ```
 
+```youtube
+-iiodIiNLVU?si
+```
+
 If we define "World Peace" as the elimination of systematized state violence (ie, war and occupation), then world peace, by definition, would mean:
 
 - An end to all occupation, everywhere: Tibet, Xinjiang, Palestine, Ukraine, Kurdistan, to name a few experiencing active and violent occupations.
