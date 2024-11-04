@@ -6,7 +6,15 @@ date: "2024-10-30"
 
 It's easy to say we want world peace. But as with so many other things, if we consider what that means, implementation rapidly skews to the radical.
 
-If we define "World Peace" as the elimination of systemetized state violence (ie, war and occupation), then world peace, by definition, would mean:
+```js
+this is just a normal code block
+```
+
+```project
+pirate-ship-rules
+```
+
+If we define "World Peace" as the elimination of systematized state violence (ie, war and occupation), then world peace, by definition, would mean:
 
 - An end to all occupation, everywhere: Tibet, Xinjiang, Palestine, Ukraine, Kurdistan, to name a few experiencing active and violent occupations.
 - Reparation of the damages caused by occupations that have otherwise been completed. Both occupations of settlement (like the genocide perpetrated by thee United States against the American peoples), and internal occupations (the erasure of real cultural identities by national monoliths like Russia, Germany, China, Iran, and so on).
