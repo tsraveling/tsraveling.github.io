@@ -1,15 +1,9 @@
-import React, {
-  ClassAttributes,
-  FunctionComponent,
-  HTMLAttributes,
-  ReactElement,
-} from "react";
-import postsData, { getPost } from "../../lib/PostData";
-import ReactMarkdown, { Components, ExtraProps } from "react-markdown";
+import Main from "@/components/Main";
 import Nav from "@/components/Nav";
 import Page from "@/components/Page";
-import Main from "@/components/Main";
-import Head from "next/head";
+import React, { ClassAttributes, HTMLAttributes, ReactElement } from "react";
+import ReactMarkdown, { Components, ExtraProps } from "react-markdown";
+import postsData, { getPost } from "../../lib/PostData";
 
 interface ErrorBlockProps {
   type: string;
@@ -23,11 +17,11 @@ const ErrorBlock = ({ type, children }: ErrorBlockProps) => (
   </div>
 );
 
-export default async function Post({
-  params,
-}: {
+export type PostProps = {
   params: Promise<{ slug: string }>;
-}) {
+};
+
+export default async function Post({ params }: PostProps) {
   const resolvedParams = await params;
   const { slug } = resolvedParams;
   const thisPost = getPost(slug);
@@ -83,21 +77,14 @@ export default async function Post({
   const postDate = new Date(thisPost.date);
 
   return (
-    <>
-      <Head>
-        <title>{thisPost.title}</title>
-        <meta property="og:title" content={thisPost.title} key="title" />
-        <meta name="author" content="Tim Raveling" />
-      </Head>
-      <Main>
-        <Page className="pt-11 md:pt-0" title={thisPost.title} date={postDate}>
-          <ReactMarkdown components={components}>
-            {thisPost?.content}
-          </ReactMarkdown>
-        </Page>
-        <Nav />
-      </Main>
-    </>
+    <Main>
+      <Page className="pt-11 md:pt-0" title={thisPost.title} date={postDate}>
+        <ReactMarkdown components={components}>
+          {thisPost?.content}
+        </ReactMarkdown>
+      </Page>
+      <Nav />
+    </Main>
   );
 }
 
@@ -106,4 +93,15 @@ export async function generateStaticParams() {
   // This should return an array of all possible slug values
   // For example, if your slugs are blog post IDs:
   return Object.entries(postsData.posts).map(([slug]) => ({ slug }));
+}
+
+// App Router - Dynamic metadata
+export async function generateMetadata({ params }: PostProps) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
+  const thisPost = getPost(slug);
+  return {
+    title: thisPost?.title || "404",
+    authors: [{ name: "Tim Raveling", url: "https://tsraveling.github.io" }],
+  };
 }
