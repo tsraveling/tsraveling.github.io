@@ -17,7 +17,18 @@ const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <MarginSpacer />
       </main>
       <footer className="flex align-middle justify-center">
-        <div className="py-3 text-sm text-stone-500">© 2024 Tim Raveling.</div>
+        <div className="py-3 text-sm text-center text-stone-500 px-2">
+          All text content is licensed under{" "}
+          <a
+            className="font-bold hover:underline"
+            href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+            target="_blank"
+          >
+            the CC BY-NC-ND 4.0 license
+          </a>
+          , attributable to <strong>T. S. Raveling</strong> or{" "}
+          <strong>tsraveling.com</strong>, unless otherwise indicated.
+        </div>
       </footer>
     </>
   );
