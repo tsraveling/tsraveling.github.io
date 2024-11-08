@@ -9,6 +9,7 @@ import ReactMarkdown, { Components, ExtraProps } from "react-markdown";
 import Nav from "@/components/Nav";
 import Page from "@/components/Page";
 import Main from "@/components/Main";
+import Head from "next/head";
 
 interface ErrorBlockProps {
   type: string;
@@ -82,14 +83,21 @@ export default async function Post({
   const postDate = new Date(thisPost.date);
 
   return (
-    <Main>
-      <Page className="pt-11 md:pt-0" title={thisPost.title} date={postDate}>
-        <ReactMarkdown components={components}>
-          {thisPost?.content}
-        </ReactMarkdown>
-      </Page>
-      <Nav />
-    </Main>
+    <>
+      <Head>
+        <title>{thisPost.title}</title>
+        <meta property="og:title" content={thisPost.title} key="title" />
+        <meta name="author" content="Tim Raveling" />
+      </Head>
+      <Main>
+        <Page className="pt-11 md:pt-0" title={thisPost.title} date={postDate}>
+          <ReactMarkdown components={components}>
+            {thisPost?.content}
+          </ReactMarkdown>
+        </Page>
+        <Nav />
+      </Main>
+    </>
   );
 }
 
