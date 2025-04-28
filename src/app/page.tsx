@@ -1,10 +1,14 @@
 import Image from "next/image";
 import postsData, { getPost, getRecentPosts } from "../lib/PostData";
 import Main from "@/components/Main";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "T. S. Raveling",
+};
 
 export default function Home() {
   const recentPosts = getRecentPosts(3);
-  console.log(">>> posts:", recentPosts);
 
   return (
     <Main>
