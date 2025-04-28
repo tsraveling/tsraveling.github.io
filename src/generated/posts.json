@@ -1,17 +1,5 @@
 {
   "posts": {
-    "necessity-of-violence": {
-      "slug": "necessity-of-violence",
-      "title": "The Necessity of Violence",
-      "category": "politics",
-      "date": "2024-10-30",
-      "content": "\nNonviolent action is still the threat of violence, usually against a group not sure of its power in the area of effect, and uncertain of the moral support of its power base.\n\n- Martin Luther King, Jr. was backed by the threat of violence from Malcolm X and the Black Panthers. The nonviolent marches were demonstrations of numbers and unity, and a loud refusal to remain submissive. This pushed whites and politicians to make a choice, either to instigate violence themselves, or to accept the new status quo. The American system of power is (at least somewhat) democratic, meaning politicians were forced to make decisions based not only on their own personal emotional response, but also the self-interested desire to remain in power -- which meant not committing public atrocities against the thousands of Black nonviolent protestors.\n- Gandhi marched to the sea with tens of thousands of people, again forcing the hands of the British. The economic benefits of colonialism -- mostly to the elite -- were outweighed again by an increasingly democratic system that relied on the support of **normal people** back home, with transparency provided by freedom of the press. Again it was either atrocity (which results in a loss of power within democratic systems) or acquiescence.\n\nA similar tactic is the **strike** which leverages the coercion of economic / infrastructural loss, which primarily harms the power structures of the elite.\n\n**However.**\n\n- In a fascist system democracy is already destroyed. Nonviolence is not an option against the State of Iran, because the power structure does not rely on the support of the people. In fact, the power structure is constructed in direct opposition to the people, using the divisive coercion tactics of cults and empires.\n- These techniques are only as good as the ethical sense of the dominant caste. The Civil Rights leaders of the 60s forced action, but the voting base only cared insomuch as Black bodies were under direct threat of violence and death. The more subtle forms of caste thinking, ie economic and cultural ones, were untouched by this movement because the main white bourgeois caste in the United States could not be made to care about them.\n",
-      "mentions": [],
-      "mentionedBy": [],
-      "wordCount": 366,
-      "readingTime": 2,
-      "excerpt": "Nonviolent action is still the threat of violence, usually against a group not sure of its power in the area of effect, and uncertain of the moral support of i..."
-    },
     "puzzle-notes": {
       "slug": "puzzle-notes",
       "title": "Notes: Puzzles",
@@ -23,25 +11,9 @@
       "wordCount": 415,
       "readingTime": 3,
       "excerpt": "GMTK: Catch and Revelations\n\nFrom GMTK's video on puzzle design:\n\n- Present the problem, the tool, and the \"catch\" -- why the obvious application of the tool..."
-    },
-    "world-peace": {
-      "slug": "world-peace",
-      "title": "All I Want is World Peace",
-      "category": "politics",
-      "date": "2024-10-30",
-      "content": "\nIt's easy to say we want world peace. But as with so many other things, if we consider what that means, implementation rapidly skews to the radical.\n\n```js\nthis is just a normal code block\n```\n\n```project\npirate-ship-rules\n```\n\n```youtube\n-iiodIiNLVU?si\n```\n\nIf we define \"World Peace\" as the elimination of systematized state violence (ie, war and occupation), then world peace, by definition, would mean:\n\n- An end to all occupation, everywhere: Tibet, Xinjiang, Palestine, Ukraine, Kurdistan, to name a few experiencing active and violent occupations.\n- Reparation of the damages caused by occupations that have otherwise been completed. Both occupations of settlement (like the genocide perpetrated by thee United States against the American peoples), and internal occupations (the erasure of real cultural identities by national monoliths like Russia, Germany, China, Iran, and so on).\n- An end to all coercive labor practices, everywhere. This would require a logistical leveling of the species / planet and likely the complete deconstruction of capitalism, to be replaced by a self-organizing system with an output of sustainability and human care rather than resource concentration and cancerous growth.\n- Eliminations of systemic oppression within human groups. This includes: ethnic oppression, religious oppression, gender oppression, sexual oppression, etc etc: all limitation of human freedom based on identity group membership. This cuts both ways; no one could be _individually_ restricted from practicing their religious rights, but everyone would also be _individually_ protected from religious action. So children and women (for instance) would be protected from patriarchal religious control, even as those religious individuals were protected in their individual religious practice.\n",
-      "mentions": [],
-      "mentionedBy": [],
-      "wordCount": 264,
-      "readingTime": 2,
-      "excerpt": "It's easy to say we want world peace. But as with so many other things, if we consider what that means, implementation rapidly skews to the radical.\n\njs\nthis i..."
     }
   },
   "categories": {
-    "politics": [
-      "necessity-of-violence",
-      "world-peace"
-    ],
     "games": [
       "puzzle-notes"
     ]
