@@ -8,7 +8,6 @@ import {
   DarkModeIcon,
   HomeIcon,
   LightModeIcon,
-  TwitterIcon,
 } from "./Icons";
 
 interface NavIconLinkProps {
@@ -76,9 +75,6 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
       </NavIconLink>
       <NavIconLink href="/" label="Comment on BlueSky">
         <BlueSkyIcon className={iconClasses} />
-      </NavIconLink>
-      <NavIconLink href="/" label="Comment on Twitter">
-        <TwitterIcon className={iconClasses} />
       </NavIconLink>
       <button
         className={buttonClasses + " -mt-1"}
