@@ -27,10 +27,6 @@ export default function Home() {
           </a>{" "}
           You can find some of my writing below -- if you like it (or hate it!)
           feel free to reach out to me on{" "}
-          <a href="https://twitter.com/tsraveling" target="_blank">
-            Twitter
-          </a>{" "}
-          or{" "}
           <a
             href="https://bsky.app/profile/tsraveling.bsky.social"
             target="_blank"
