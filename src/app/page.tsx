@@ -20,7 +20,7 @@ export default function Home() {
         />
         <h1 className="mb-2">Welcome.</h1>
         <p className="text-lg">
-          This is the personal site of Tim Raveling. I'm a game designer,
+          This is the personal site of Tim Raveling. I&apos;m a game designer,
           artist, systems architect, and co-host of the{" "}
           <a href="https://serialudo.libsyn.com/" target="_blank">
             Seria Ludo podcast.

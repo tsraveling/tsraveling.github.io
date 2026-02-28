@@ -1,7 +1,7 @@
 "use client";
 import { clsx } from "clsx";
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import {
   BlueSkyIcon,
   BookmarkIcon,
@@ -45,13 +45,12 @@ interface NavProps {
 }
 
 const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const { theme, setTheme } = useTheme();
-
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleTheme = () => {
     if (!mounted) return;
