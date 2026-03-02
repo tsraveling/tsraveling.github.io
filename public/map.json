@@ -1,0 +1,16 @@
+{
+  "entities": [
+    { "id": "home", "x": 0, "y": 0, "type": "home" },
+    { "id": "social-junction", "x": 250, "y": 0, "type": "junction" },
+    { "id": "bluesky", "x": 500, "y": -120, "type": "page", "title": "Bluesky",
+      "link": "https://bsky.app/profile/tsraveling.bsky.social" },
+    { "id": "github", "x": 500, "y": 120, "type": "page", "title": "GitHub",
+      "link": "https://github.com/tsraveling" }
+  ],
+  "connections": [
+    { "a": "home", "b": "social-junction" },
+    { "a": "social-junction", "b": "bluesky" },
+    { "a": "social-junction", "b": "github" }
+  ],
+  "labels": []
+}

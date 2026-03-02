@@ -1,61 +1,119 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import mapData from "../../public/map.json";
+import HomeNode from "@/components/map/HomeNode";
+import JunctionNode from "@/components/map/JunctionNode";
+import PageNode from "@/components/map/PageNode";
+import NodeConnection from "@/components/map/NodeConnection";
+import Label from "@/components/map/Label";
 
 const MOVE_SPEED = 8;
 const WORLD_SIZE = 4000;
 
-const nodes = [
-  { id: 1, x: 0, y: 0, title: "🏠 Home!!", desc: "You start here.", color: "#6366f1" },
-  { id: 2, x: -600, y: -400, title: "📝 Notes", desc: "A place for thoughts.", color: "#f59e0b" },
-  { id: 3, x: 500, y: -350, title: "🎨 Projects", desc: "Things I'm building.", color: "#ec4899" },
-  { id: 4, x: -400, y: 500, title: "📚 Reading", desc: "Books & articles.", color: "#10b981" },
-  { id: 5, x: 700, y: 400, title: "🎵 Music", desc: "What I'm listening to.", color: "#8b5cf6" },
-  { id: 6, x: -800, y: 100, title: "💡 Ideas", desc: "Half-baked brilliance.", color: "#f97316" },
-  { id: 7, x: 200, y: 700, title: "🗺️ Travel", desc: "Places to go.", color: "#06b6d4" },
-  { id: 8, x: -200, y: -800, title: "🧪 Experiments", desc: "Wild stuff.", color: "#ef4444" },
-  { id: 9, x: 900, y: -100, title: "🤝 People", desc: "Connections.", color: "#84cc16" },
-  { id: 10, x: -500, y: -700, title: "📷 Photos", desc: "Memories.", color: "#a855f7" },
-  { id: 11, x: 400, y: -800, title: "🔧 Tools", desc: "Utilities I love.", color: "#14b8a6" },
-  { id: 12, x: -900, y: -500, title: "🎮 Games", desc: "Fun & play.", color: "#e11d48" },
-];
+// --- Types ---
 
-const edges = [
-  [0, 1], [0, 2], [0, 3], [0, 4],
-  [1, 5], [1, 9], [2, 8], [2, 10],
-  [3, 6], [4, 8], [5, 11],
-];
+type EntityType = "home" | "junction" | "page";
+
+type Entity = {
+  id: string;
+  x: number;
+  y: number;
+  type: EntityType;
+  title?: string;
+  link?: string;
+  size?: number;
+  backgroundImage?: string;
+  color?: string;
+};
+
+type Connection = {
+  a: string;
+  b: string;
+  variant?: "default" | "secondary" | "footnote";
+};
+
+type LabelData = {
+  text: string;
+  x: number;
+  y: number;
+  wrapWidth?: number;
+  variant?: "standard" | "secondary" | "footnote" | "title";
+};
+
+type MapData = {
+  entities: Entity[];
+  connections: Connection[];
+  labels: LabelData[];
+};
+
+// --- Helpers ---
+
+function getRadius(entity: Entity): number {
+  switch (entity.type) {
+    case "home":
+      return 150;
+    case "junction":
+      return 8;
+    case "page":
+      return (entity.size ?? 200) / 2;
+  }
+}
+
+function entityById(entities: Entity[]): Map<string, Entity> {
+  const map = new Map<string, Entity>();
+  for (const e of entities) map.set(e.id, e);
+  return map;
+}
+
+// --- Component ---
 
 export default function Page() {
   const [camera, setCamera] = useState({ x: 0, y: 0 });
+  const [transitioning, setTransitioning] = useState(false);
   const keysRef = useRef<Set<string>>(new Set());
   const rafRef = useRef<number>(0);
 
+  const data = mapData as MapData;
+  const lookup = entityById(data.entities);
+  const half = WORLD_SIZE / 2;
+
+  const navigateTo = useCallback((x: number, y: number) => {
+    setTransitioning(true);
+    setCamera({ x: -x, y: -y });
+    setTimeout(() => setTransitioning(false), 400);
+  }, []);
+
   const tick = useCallback(() => {
     const keys = keysRef.current;
-    let dx = 0, dy = 0;
+    let dx = 0,
+      dy = 0;
     if (keys.has("w") || keys.has("arrowup")) dy += MOVE_SPEED;
     if (keys.has("s") || keys.has("arrowdown")) dy -= MOVE_SPEED;
     if (keys.has("a") || keys.has("arrowleft")) dx += MOVE_SPEED;
     if (keys.has("d") || keys.has("arrowright")) dx -= MOVE_SPEED;
 
     if (dx || dy) {
-      setCamera((prev) => {
-        const half = WORLD_SIZE / 2;
-        return {
-          x: Math.max(-half, Math.min(half, prev.x + dx)),
-          y: Math.max(-half, Math.min(half, prev.y + dy)),
-        };
-      });
+      setCamera((prev) => ({
+        x: Math.max(-half, Math.min(half, prev.x + dx)),
+        y: Math.max(-half, Math.min(half, prev.y + dy)),
+      }));
     }
+
     rafRef.current = requestAnimationFrame(tick);
-  }, []);
+  }, [half]);
 
   useEffect(() => {
-    const navKeys = new Set(["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright"]);
+    const navKeys = new Set([
+      "w", "a", "s", "d",
+      "arrowup", "arrowdown", "arrowleft", "arrowright",
+    ]);
     const onDown = (e: KeyboardEvent) => {
       const k = e.key.toLowerCase();
-      if (navKeys.has(k)) { e.preventDefault(); keysRef.current.add(k); }
+      if (navKeys.has(k)) {
+        e.preventDefault();
+        keysRef.current.add(k);
+      }
     };
     const onUp = (e: KeyboardEvent) => keysRef.current.delete(e.key.toLowerCase());
 
@@ -70,15 +128,14 @@ export default function Page() {
     };
   }, [tick]);
 
-  const half = WORLD_SIZE / 2;
-
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#0a0a0a] relative cursor-default">
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
         }}
@@ -87,44 +144,114 @@ export default function Page() {
       {/* World */}
       <div
         className="absolute left-1/2 top-1/2 will-change-transform"
-        style={{ transform: `translate(${camera.x}px, ${camera.y}px)` }}
+        style={{
+          transform: `translate(${camera.x}px, ${camera.y}px)`,
+          transition: transitioning ? "transform 400ms ease-out" : "none",
+        }}
       >
-        {/* Edges */}
+        {/* Connections SVG layer */}
         <svg
-          className="absolute pointer-events-none"
-          style={{ left: -half, top: -half, width: WORLD_SIZE, height: WORLD_SIZE }}
+          className="absolute"
+          style={{
+            left: -half,
+            top: -half,
+            width: WORLD_SIZE,
+            height: WORLD_SIZE,
+            pointerEvents: "none",
+          }}
         >
-          {edges.map(([a, b], i) => (
-            <line
-              key={i}
-              x1={nodes[a].x + half}
-              y1={nodes[a].y + half}
-              x2={nodes[b].x + half}
-              y2={nodes[b].y + half}
-              stroke="rgba(255,255,255,0.06)"
-              strokeWidth={1.5}
-            />
-          ))}
+          <g style={{ pointerEvents: "auto" }}>
+            {data.connections.map((conn) => {
+              const ea = lookup.get(conn.a);
+              const eb = lookup.get(conn.b);
+              if (!ea || !eb) return null;
+              return (
+                <NodeConnection
+                  key={`${conn.a}-${conn.b}`}
+                  ax={ea.x + half}
+                  ay={ea.y + half}
+                  aRadius={getRadius(ea)}
+                  bx={eb.x + half}
+                  by={eb.y + half}
+                  bRadius={getRadius(eb)}
+                  variant={conn.variant ?? "default"}
+                  onNavigate={(x, y) => navigateTo(x - half, y - half)}
+                />
+              );
+            })}
+          </g>
         </svg>
 
-        {/* Nodes */}
-        {nodes.map((node) => (
-          <div
-            key={node.id}
-            className="absolute -translate-x-1/2 -translate-y-1/2 bg-white/[0.04] rounded-2xl px-6 py-5 min-w-40 backdrop-blur-xl cursor-pointer transition-[border-color,box-shadow] duration-200 border"
-            style={{ left: node.x, top: node.y, borderColor: `${node.color}44` }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = node.color;
-              e.currentTarget.style.boxShadow = `0 0 24px ${node.color}33`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = `${node.color}44`;
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            <div className="text-lg font-semibold text-white mb-1">{node.title}</div>
-            <div className="text-[13px] text-white/50">{node.desc}</div>
-          </div>
+        {/* Entity nodes */}
+        {data.entities.map((entity) => {
+          const radius = getRadius(entity);
+          const isInteractive = !!entity.link;
+
+          const node = (
+            <div
+              className="absolute"
+              style={{
+                left: entity.x,
+                top: entity.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {entity.type === "home" && <HomeNode />}
+              {entity.type === "junction" && (
+                <JunctionNode color={entity.color} />
+              )}
+              {entity.type === "page" && (
+                <PageNode
+                  size={entity.size ?? 200}
+                  title={entity.title}
+                  backgroundImage={entity.backgroundImage}
+                />
+              )}
+            </div>
+          );
+
+          if (isInteractive) {
+            return (
+              <a
+                key={entity.id}
+                href={entity.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute block cursor-pointer group"
+                style={{
+                  left: entity.x,
+                  top: entity.y,
+                  transform: "translate(-50%, -50%)",
+                  width: radius * 2,
+                  height: radius * 2,
+                }}
+              >
+                <div className="transition-[filter] duration-200 group-hover:[filter:drop-shadow(0_0_16px_rgba(255,255,255,0.3))]">
+                  {entity.type === "page" && (
+                    <PageNode
+                      size={entity.size ?? 200}
+                      title={entity.title}
+                      backgroundImage={entity.backgroundImage}
+                    />
+                  )}
+                </div>
+              </a>
+            );
+          }
+
+          return <div key={entity.id}>{node}</div>;
+        })}
+
+        {/* Labels */}
+        {data.labels.map((label, i) => (
+          <Label
+            key={i}
+            text={label.text}
+            x={label.x}
+            y={label.y}
+            wrapWidth={label.wrapWidth}
+            variant={label.variant}
+          />
         ))}
       </div>
 
