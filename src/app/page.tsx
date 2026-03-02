@@ -27,7 +27,7 @@ export default function Page() {
   const navigateTo = useCallback((x: number, y: number) => {
     setTransitioning(true);
     setCamera({ x: -x, y: -y });
-    setTimeout(() => setTransitioning(false), 400);
+    setTimeout(() => setTransitioning(false), 500);
   }, []);
 
   const tick = useCallback(() => {
@@ -86,6 +86,8 @@ export default function Page() {
             "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
+          maskImage: "radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)",
         }}
       />
 
@@ -94,7 +96,7 @@ export default function Page() {
         className="absolute left-1/2 top-1/2 will-change-transform"
         style={{
           transform: `translate(${camera.x}px, ${camera.y}px)`,
-          transition: transitioning ? "transform 400ms ease-out" : "none",
+          transition: transitioning ? "transform 500ms cubic-bezier(0.22, 1.2, 0.36, 1)" : "none",
         }}
       >
         {/* Connections SVG layer */}
@@ -185,7 +187,7 @@ export default function Page() {
       </div>
 
       {/* HUD */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-3 items-center bg-white/[0.06] backdrop-blur-xl rounded-xl px-5 py-2.5 border border-white/[0.08]">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-3 items-center bg-white/[0.06] backdrop-blur-xl rounded-xl px-5 py-2.5 border border-white/[0.08]" style={{ opacity: 0, animation: "hud-slide-up 600ms cubic-bezier(0.22, 1.2, 0.36, 1) 200ms both" }}>
         <span className="text-white/40 text-[13px]">Navigate</span>
         <div className="flex flex-col items-center gap-0.5">
           <Key label="W" />

@@ -5,12 +5,15 @@ const CONNECTION_COLOR = "rgba(255,255,255,0.8)";
 export default function JunctionNode({ entity }: { entity: Entity }) {
   if (entity.title) {
     return (
-      <div
-        className="rounded-full border-2 bg-[#0a0a0a] grid place-items-center aspect-square"
-        style={{ borderColor: CONNECTION_COLOR }}
-      >
+      <div className="relative grid place-items-center aspect-square">
+        {/* Circle border — scales on hover */}
+        <div
+          className="absolute inset-0 rounded-full border-2 bg-[#0a0a0a] transition-transform duration-200 group-hover:scale-[1.12]"
+          style={{ borderColor: CONNECTION_COLOR, transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+        />
+        {/* Content — stays static */}
         <span
-          className="text-xs font-semibold whitespace-nowrap px-3 pt-1"
+          className="text-xs font-semibold whitespace-nowrap px-3 pt-1 relative"
           style={{ color: CONNECTION_COLOR }}
         >
           {entity.title}
@@ -21,9 +24,11 @@ export default function JunctionNode({ entity }: { entity: Entity }) {
 
   const diameter = getRadius(entity) * 2;
   return (
-    <div
-      className="rounded-full border-2 bg-transparent"
-      style={{ width: diameter, height: diameter, borderColor: entity.color ?? "gray" }}
-    />
+    <div className="relative" style={{ width: diameter, height: diameter }}>
+      <div
+        className="absolute inset-0 rounded-full border-2 bg-transparent transition-transform duration-200 group-hover:scale-[1.12]"
+        style={{ borderColor: entity.color ?? "gray", transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+      />
+    </div>
   );
 }
