@@ -1,16 +1,14 @@
 export default function PageNode({
-  size = 200,
-  title,
-  backgroundImage,
+  page: Entit
 }: {
-  size?: number;
+  radius?: number;
   title?: string;
   backgroundImage?: string;
 }) {
   return (
     <div
       className="rounded-full border-2 border-white/20 bg-white/5 overflow-hidden flex items-center justify-center relative"
-      style={{ width: size, height: size }}
+      style={{ width: radius * 2, height: radius * 2 }}
     >
       {backgroundImage && (
         <img

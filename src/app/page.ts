@@ -1,72 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import mapData from "../../public/map.json";
 import HomeNode from "@/components/map/HomeNode";
 import JunctionNode from "@/components/map/JunctionNode";
-import PageNode from "@/components/map/PageNode";
-import NodeConnection from "@/components/map/NodeConnection";
 import Label from "@/components/map/Label";
+import NodeConnection from "@/components/map/NodeConnection";
+import PageNode from "@/components/map/PageNode";
+import { MapData, entityById, getRadius } from "@/types/mapTypes";
+import { useCallback, useEffect, useRef, useState } from "react";
+import mapData from "../../public/map.json";
 
 const MOVE_SPEED = 8;
 const WORLD_SIZE = 4000;
-
-// --- Types ---
-
-type EntityType = "home" | "junction" | "page";
-
-type Entity = {
-  id: string;
-  x: number;
-  y: number;
-  type: EntityType;
-  title?: string;
-  link?: string;
-  size?: number;
-  backgroundImage?: string;
-  color?: string;
-};
-
-type Connection = {
-  a: string;
-  b: string;
-  variant?: "default" | "secondary" | "footnote";
-};
-
-type LabelData = {
-  text: string;
-  x: number;
-  y: number;
-  wrapWidth?: number;
-  variant?: "standard" | "secondary" | "footnote" | "title";
-};
-
-type MapData = {
-  entities: Entity[];
-  connections: Connection[];
-  labels: LabelData[];
-};
-
-// --- Helpers ---
-
-function getRadius(entity: Entity): number {
-  switch (entity.type) {
-    case "home":
-      return 150;
-    case "junction":
-      return 8;
-    case "page":
-      return (entity.size ?? 200) / 2;
-  }
-}
-
-function entityById(entities: Entity[]): Map<string, Entity> {
-  const map = new Map<string, Entity>();
-  for (const e of entities) map.set(e.id, e);
-  return map;
-}
-
-// --- Component ---
 
 export default function Page() {
   const [camera, setCamera] = useState({ x: 0, y: 0 });
@@ -77,6 +21,8 @@ export default function Page() {
   const data = mapData as MapData;
   const lookup = entityById(data.entities);
   const half = WORLD_SIZE / 2;
+
+  // SECTION: Navigation
 
   const navigateTo = useCallback((x: number, y: number) => {
     setTransitioning(true);
@@ -128,6 +74,8 @@ export default function Page() {
     };
   }, [tick]);
 
+  // SECTION: Render
+
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#0a0a0a] relative cursor-default">
       {/* Dot grid */}
@@ -135,7 +83,7 @@ export default function Page() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+            "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
         }}
@@ -202,7 +150,7 @@ export default function Page() {
               )}
               {entity.type === "page" && (
                 <PageNode
-                  size={entity.size ?? 200}
+                  radius={getRadius(entity)}
                   title={entity.title}
                   backgroundImage={entity.backgroundImage}
                 />
@@ -229,7 +177,6 @@ export default function Page() {
                 <div className="transition-[filter] duration-200 group-hover:[filter:drop-shadow(0_0_16px_rgba(255,255,255,0.3))]">
                   {entity.type === "page" && (
                     <PageNode
-                      size={entity.size ?? 200}
                       title={entity.title}
                       backgroundImage={entity.backgroundImage}
                     />
