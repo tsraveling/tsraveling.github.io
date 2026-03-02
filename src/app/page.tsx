@@ -83,7 +83,7 @@ export default function Page() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
         }}
@@ -137,8 +137,8 @@ export default function Page() {
 
           const nodeContent =
             entity.type === "home" ? <HomeNode entity={entity} /> :
-            entity.type === "junction" ? <JunctionNode entity={entity} /> :
-            entity.type === "page" ? <PageNode entity={entity} /> : null;
+              entity.type === "junction" ? <JunctionNode entity={entity} /> :
+                entity.type === "page" ? <PageNode entity={entity} /> : null;
 
           if (isInteractive) {
             return (

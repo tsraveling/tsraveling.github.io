@@ -1,7 +1,7 @@
 {
   "entities": [
-    { "id": "home", "x": 0, "y": 0, "type": "home" },
-    { "id": "social-junction", "x": 250, "y": 0, "type": "junction" },
+    { "id": "home", "x": 0, "y": 0, "type": "home", "title": "TSR", "backgroundImage": "/profile.png" },
+    { "id": "social-junction", "x": 250, "y": 0, "type": "junction", "title": "Social" },
     { "id": "bluesky", "x": 500, "y": -120, "type": "page", "title": "Bluesky",
       "link": "https://bsky.app/profile/tsraveling.bsky.social", "radius": 50 },
     { "id": "github", "x": 500, "y": 120, "type": "page", "title": "GitHub",
