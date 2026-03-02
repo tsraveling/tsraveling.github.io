@@ -1,8 +1,11 @@
-export default function JunctionNode({ color = "gray" }: { color?: string }) {
+import { Entity, getRadius } from "@/types/mapTypes";
+
+export default function JunctionNode({ entity }: { entity: Entity }) {
+  const diameter = getRadius(entity) * 2;
   return (
     <div
-      className="w-4 h-4 rounded-full border-2 bg-transparent"
-      style={{ borderColor: color }}
+      className="rounded-full border-2 bg-transparent"
+      style={{ width: diameter, height: diameter, borderColor: entity.color ?? "gray" }}
     />
   );
 }

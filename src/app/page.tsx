@@ -135,28 +135,10 @@ export default function Page() {
           const radius = getRadius(entity);
           const isInteractive = !!entity.link;
 
-          const node = (
-            <div
-              className="absolute"
-              style={{
-                left: entity.x,
-                top: entity.y,
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              {entity.type === "home" && <HomeNode />}
-              {entity.type === "junction" && (
-                <JunctionNode color={entity.color} />
-              )}
-              {entity.type === "page" && (
-                <PageNode
-                  radius={getRadius(entity)}
-                  title={entity.title}
-                  backgroundImage={entity.backgroundImage}
-                />
-              )}
-            </div>
-          );
+          const nodeContent =
+            entity.type === "home" ? <HomeNode entity={entity} /> :
+            entity.type === "junction" ? <JunctionNode entity={entity} /> :
+            entity.type === "page" ? <PageNode entity={entity} /> : null;
 
           if (isInteractive) {
             return (
@@ -175,18 +157,25 @@ export default function Page() {
                 }}
               >
                 <div className="transition-[filter] duration-200 group-hover:[filter:drop-shadow(0_0_16px_rgba(255,255,255,0.3))]">
-                  {entity.type === "page" && (
-                    <PageNode
-                      title={entity.title}
-                      backgroundImage={entity.backgroundImage}
-                    />
-                  )}
+                  {nodeContent}
                 </div>
               </a>
             );
           }
 
-          return <div key={entity.id}>{node}</div>;
+          return (
+            <div
+              key={entity.id}
+              className="absolute"
+              style={{
+                left: entity.x,
+                top: entity.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {nodeContent}
+            </div>
+          );
         })}
 
         {/* Labels */}

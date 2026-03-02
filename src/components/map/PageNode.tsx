@@ -1,28 +1,25 @@
-export default function PageNode({
-  page: Entit
-}: {
-  radius?: number;
-  title?: string;
-  backgroundImage?: string;
-}) {
+import { Entity, getRadius } from "@/types/mapTypes";
+
+export default function PageNode({ entity }: { entity: Entity }) {
+  const radius = getRadius(entity);
+  const diameter = radius * 2;
   return (
     <div
       className="rounded-full border-2 border-white/20 bg-white/5 overflow-hidden flex items-center justify-center relative"
-      style={{ width: radius * 2, height: radius * 2 }}
+      style={{ width: diameter, height: diameter }}
     >
-      {backgroundImage && (
+      {entity.backgroundImage && (
         <img
-          src={backgroundImage}
+          src={entity.backgroundImage}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
       )}
-      {title && (
+      {entity.title && (
         <span
-          className="text-white text-lg font-semibold text-center relative z-10 px-2"
-          style={{ maxWidth: size * 0.7 }}
+          className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold text-center z-10 px-2 pt-1"
         >
-          {title}
+          <span style={{ maxWidth: diameter * 0.7 }}>{entity.title}</span>
         </span>
       )}
     </div>
