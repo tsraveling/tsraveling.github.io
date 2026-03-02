@@ -5,10 +5,9 @@ import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
 import NodeConnection from "@/components/map/NodeConnection";
 import PageNode from "@/components/map/PageNode";
-import { getRadius } from "@/types/mapTypes";
-import { parseExcalidraw } from "@/lib/parseExcalidraw";
+import { MapData, entityById, getRadius } from "@/types/mapTypes";
 import { useCallback, useEffect, useRef, useState } from "react";
-import excalidrawFile from "../generated/map.excalidraw.json";
+import mapData from "../../public/map.json";
 
 const MOVE_SPEED = 8;
 const WORLD_SIZE = 4000;
@@ -19,7 +18,8 @@ export default function Page() {
   const keysRef = useRef<Set<string>>(new Set());
   const rafRef = useRef<number>(0);
 
-  const data = parseExcalidraw(excalidrawFile);
+  const data = mapData as MapData;
+  const lookup = entityById(data.entities);
   const half = WORLD_SIZE / 2;
 
   // SECTION: Navigation
@@ -83,7 +83,7 @@ export default function Page() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)",
+            "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
         }}
@@ -109,17 +109,24 @@ export default function Page() {
           }}
         >
           <g style={{ pointerEvents: "auto" }}>
-            {data.connections.map((conn, i) => (
-              <NodeConnection
-                key={i}
-                ax={conn.ax + half}
-                ay={conn.ay + half}
-                bx={conn.bx + half}
-                by={conn.by + half}
-                variant={conn.variant ?? "default"}
-                onNavigate={(x, y) => navigateTo(x - half, y - half)}
-              />
-            ))}
+            {data.connections.map((conn) => {
+              const ea = lookup.get(conn.a);
+              const eb = lookup.get(conn.b);
+              if (!ea || !eb) return null;
+              return (
+                <NodeConnection
+                  key={`${conn.a}-${conn.b}`}
+                  ax={ea.x + half}
+                  ay={ea.y + half}
+                  aRadius={getRadius(ea)}
+                  bx={eb.x + half}
+                  by={eb.y + half}
+                  bRadius={getRadius(eb)}
+                  variant={conn.variant ?? "default"}
+                  onNavigate={(x, y) => navigateTo(x - half, y - half)}
+                />
+              );
+            })}
           </g>
         </svg>
 
@@ -128,10 +135,28 @@ export default function Page() {
           const radius = getRadius(entity);
           const isInteractive = !!entity.link;
 
-          const nodeContent =
-            entity.type === "home" ? <HomeNode entity={entity} /> :
-              entity.type === "junction" ? <JunctionNode entity={entity} /> :
-                entity.type === "page" ? <PageNode entity={entity} /> : null;
+          const node = (
+            <div
+              className="absolute"
+              style={{
+                left: entity.x,
+                top: entity.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {entity.type === "home" && <HomeNode />}
+              {entity.type === "junction" && (
+                <JunctionNode color={entity.color} />
+              )}
+              {entity.type === "page" && (
+                <PageNode
+                  radius={getRadius(entity)}
+                  title={entity.title}
+                  backgroundImage={entity.backgroundImage}
+                />
+              )}
+            </div>
+          );
 
           if (isInteractive) {
             return (
@@ -150,25 +175,18 @@ export default function Page() {
                 }}
               >
                 <div className="transition-[filter] duration-200 group-hover:[filter:drop-shadow(0_0_16px_rgba(255,255,255,0.3))]">
-                  {nodeContent}
+                  {entity.type === "page" && (
+                    <PageNode
+                      title={entity.title}
+                      backgroundImage={entity.backgroundImage}
+                    />
+                  )}
                 </div>
               </a>
             );
           }
 
-          return (
-            <div
-              key={entity.id}
-              className="absolute"
-              style={{
-                left: entity.x,
-                top: entity.y,
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              {nodeContent}
-            </div>
-          );
+          return <div key={entity.id}>{node}</div>;
         })}
 
         {/* Labels */}

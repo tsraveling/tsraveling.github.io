@@ -5,7 +5,7 @@ export default function PageNode({ entity }: { entity: Entity }) {
   const diameter = radius * 2;
   return (
     <div
-      className="rounded-full border-2 border-white/20 bg-white/5 overflow-hidden flex items-center justify-center relative"
+      className="rounded-full border-2 border-white/20 bg-[#0a0a0a] overflow-hidden flex items-center justify-center relative"
       style={{ width: diameter, height: diameter }}
     >
       {entity.backgroundImage && (

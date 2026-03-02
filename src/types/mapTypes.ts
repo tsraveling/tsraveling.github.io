@@ -13,8 +13,10 @@ export type Entity = {
 };
 
 export type Connection = {
-  a: string;
-  b: string;
+  ax: number;
+  ay: number;
+  bx: number;
+  by: number;
   variant?: "default" | "secondary" | "footnote";
 };
 
@@ -44,10 +46,4 @@ export function getRadius(entity: Entity): number {
     case "page":
       return 100;
   }
-}
-
-export function entityById(entities: Entity[]): Map<string, Entity> {
-  const map = new Map<string, Entity>();
-  for (const e of entities) map.set(e.id, e);
-  return map;
 }

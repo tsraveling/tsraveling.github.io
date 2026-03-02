@@ -75,6 +75,49 @@ function generatePosts() {
 
   // Write the generated data
   fs.writeFileSync(outputFile, JSON.stringify({ posts, categories }, null, 2));
+
+  return posts;
 }
 
-generatePosts();
+function generateStatus(posts) {
+  const mapFile = path.join(process.cwd(), "src/generated/map.excalidraw.json");
+  const mapData = JSON.parse(fs.readFileSync(mapFile, "utf8"));
+
+  // Collect all local links from map ellipses
+  const mappedSlugs = new Set();
+  for (const el of mapData.elements) {
+    if (el.isDeleted || el.type !== "ellipse" || !el.link) continue;
+    // Local links look like /slug
+    const match = el.link.match(/^\/([a-z0-9_-]+)$/i);
+    if (match) mappedSlugs.add(match[1]);
+  }
+
+  const mapped = [];
+  const unmapped = [];
+
+  for (const slug of Object.keys(posts).sort()) {
+    const title = posts[slug].title || slug;
+    if (mappedSlugs.has(slug)) {
+      mapped.push(`- [x] ${title}: [/${slug}]`);
+    } else {
+      unmapped.push(`- [ ] ${title}: [/${slug}]`);
+    }
+  }
+
+  const lines = [
+    "# MAPPED:",
+    "",
+    ...(mapped.length ? mapped : ["(none)"]),
+    "",
+    "# UNMAPPED:",
+    "",
+    ...(unmapped.length ? unmapped : ["(none)"]),
+    "",
+  ];
+
+  const outputFile = path.join(process.cwd(), "src/generated/STATUS.md");
+  fs.writeFileSync(outputFile, lines.join("\n"));
+}
+
+const posts = generatePosts();
+generateStatus(posts);

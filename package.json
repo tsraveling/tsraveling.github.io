@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "bash compile.sh && next dev",
+    "build": "bash compile.sh && next build",
     "start": "npx serve out",
     "lint": "eslint .",
     "static-dev": "next build && npx serve out",

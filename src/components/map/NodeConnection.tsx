@@ -13,34 +13,19 @@ const VARIANT_STYLES: Record<Variant, { stroke: string; strokeWidth: number }> =
 export default function NodeConnection({
   ax,
   ay,
-  aRadius,
   bx,
   by,
-  bRadius,
   variant = "default",
   onNavigate,
 }: {
   ax: number;
   ay: number;
-  aRadius: number;
   bx: number;
   by: number;
-  bRadius: number;
   variant?: Variant;
   onNavigate?: (x: number, y: number) => void;
 }) {
   const [hovered, setHovered] = useState(false);
-
-  const dx = bx - ax;
-  const dy = by - ay;
-  const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-  const ux = dx / dist;
-  const uy = dy / dist;
-
-  const x1 = ax + ux * aRadius;
-  const y1 = ay + uy * aRadius;
-  const x2 = bx - ux * bRadius;
-  const y2 = by - uy * bRadius;
 
   const style = VARIANT_STYLES[variant];
 
@@ -72,10 +57,10 @@ export default function NodeConnection({
     <g>
       {/* Visible line */}
       <line
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
+        x1={ax}
+        y1={ay}
+        x2={bx}
+        y2={by}
         stroke={style.stroke}
         strokeWidth={hovered ? style.strokeWidth + 1 : style.strokeWidth}
         style={{
@@ -85,10 +70,10 @@ export default function NodeConnection({
       />
       {/* Invisible hitbox */}
       <line
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
+        x1={ax}
+        y1={ay}
+        x2={bx}
+        y2={by}
         stroke="transparent"
         strokeWidth={12}
         className="cursor-pointer"
