@@ -1,10 +1,12 @@
 import type { LabelData } from "@/types/mapTypes";
+import { MAP_COLOR_VAR } from "@/types/mapTypes";
 
 const VARIANT_CLASSES: Record<NonNullable<LabelData["variant"]>, string> = {
-  standard: "text-sm text-white",
-  secondary: "text-xs text-gray-400",
-  footnote: "text-[10px] text-gray-600",
-  title: "text-lg text-white font-semibold",
+  standard: "text-sm",
+  secondary: "text-xs opacity-60",
+  footnote: "text-[10px] opacity-40",
+  title: "text-5xl font-semibold",
+  section: "text-6xl font-semibold",
 };
 
 export default function Label({ label }: { label: LabelData }) {
@@ -18,6 +20,7 @@ export default function Label({ label }: { label: LabelData }) {
         transform: "translate(-50%, -50%)",
         width: label.wrapWidth ?? undefined,
         whiteSpace: label.wrapWidth ? "normal" : "nowrap",
+        color: MAP_COLOR_VAR[label.color ?? "white"],
       }}
     >
       {label.text}

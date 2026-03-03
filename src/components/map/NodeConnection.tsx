@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import type { MapColor } from "@/types/mapTypes";
+import { MAP_COLOR_VAR } from "@/types/mapTypes";
 
 type Variant = "default" | "secondary" | "footnote";
 
-const VARIANT_STYLES: Record<Variant, { stroke: string; strokeWidth: number }> = {
-  default: { stroke: "rgba(255,255,255,0.8)", strokeWidth: 2 },
-  secondary: { stroke: "rgba(156,163,175,0.8)", strokeWidth: 1.5 },
-  footnote: { stroke: "rgba(55,65,81,0.8)", strokeWidth: 1 },
+const VARIANT_STYLES: Record<Variant, { opacity: number; strokeWidth: number }> = {
+  default: { opacity: 0.8, strokeWidth: 2 },
+  secondary: { opacity: 0.6, strokeWidth: 1.5 },
+  footnote: { opacity: 0.3, strokeWidth: 1 },
 };
 
 export default function NodeConnection({
@@ -16,6 +18,7 @@ export default function NodeConnection({
   bx,
   by,
   variant = "default",
+  color = "white",
   onNavigate,
 }: {
   ax: number;
@@ -23,6 +26,7 @@ export default function NodeConnection({
   bx: number;
   by: number;
   variant?: Variant;
+  color?: MapColor;
   onNavigate?: (x: number, y: number) => void;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -99,7 +103,8 @@ export default function NodeConnection({
         y1={ay}
         x2={bx}
         y2={by}
-        stroke={style.stroke}
+        stroke={MAP_COLOR_VAR[color]}
+        strokeOpacity={style.opacity}
         strokeWidth={hovered ? style.strokeWidth + 1 : style.strokeWidth}
         style={{
           filter: hovered ? "drop-shadow(0 0 4px rgba(255,255,255,0.3))" : "none",

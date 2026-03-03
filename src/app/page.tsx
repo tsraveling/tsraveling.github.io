@@ -119,6 +119,7 @@ export default function Page() {
                 bx={conn.bx + half}
                 by={conn.by + half}
                 variant={conn.variant ?? "default"}
+                color={conn.color}
                 onNavigate={(x, y) => navigateTo(x - half, y - half)}
               />
             ))}

@@ -1,3 +1,11 @@
+export type MapColor = "white" | "red" | "purple";
+
+export const MAP_COLOR_VAR: Record<MapColor, string> = {
+  white: "var(--map-color-white)",
+  red: "var(--map-color-red)",
+  purple: "var(--map-color-purple)",
+};
+
 export type EntityType = "home" | "junction" | "page";
 
 export type Entity = {
@@ -18,6 +26,7 @@ export type Connection = {
   bx: number;
   by: number;
   variant?: "default" | "secondary" | "footnote";
+  color?: MapColor;
 };
 
 export type LabelData = {
@@ -25,7 +34,8 @@ export type LabelData = {
   x: number;
   y: number;
   wrapWidth?: number;
-  variant?: "standard" | "secondary" | "footnote" | "title";
+  variant?: "standard" | "secondary" | "footnote" | "title" | "section";
+  color?: MapColor;
 };
 
 export type MapData = {
