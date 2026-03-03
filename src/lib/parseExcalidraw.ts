@@ -8,6 +8,7 @@ type ExcalidrawElement = {
   width: number;
   height: number;
   strokeWidth?: number;
+  fontSize?: number;
   text?: string;
   containerId?: string | null;
   boundElements?: { id: string; type: string }[] | null;
@@ -90,10 +91,17 @@ export function parseExcalidraw(file: ExcalidrawFile): MapData {
         variant: connectionVariant(el.strokeWidth ?? 2),
       });
     } else if (el.type === "text" && !el.containerId) {
+      const fontSize = el.fontSize ?? 16;
+      const variant = fontSize >= 28 ? "title" as const
+        : fontSize >= 14 ? "standard" as const
+        : fontSize >= 10 ? "secondary" as const
+        : "footnote" as const;
       labels.push({
         text: el.text ?? "",
         x: el.x + el.width / 2,
         y: el.y + el.height / 2,
+        wrapWidth: el.width,
+        variant,
       });
     }
   }

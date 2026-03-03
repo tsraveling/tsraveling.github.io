@@ -175,14 +175,7 @@ export default function Page() {
 
         {/* Labels */}
         {data.labels.map((label, i) => (
-          <Label
-            key={i}
-            text={label.text}
-            x={label.x}
-            y={label.y}
-            wrapWidth={label.wrapWidth}
-            variant={label.variant}
-          />
+          <Label key={i} label={label} />
         ))}
       </div>
 
