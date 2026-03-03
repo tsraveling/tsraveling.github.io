@@ -7,74 +7,16 @@ import NodeConnection from "@/components/map/NodeConnection";
 import PageNode from "@/components/map/PageNode";
 import { getRadius } from "@/types/mapTypes";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePageNav } from "@/hooks/usePageNav";
 import excalidrawFile from "../generated/map.excalidraw.json";
 
-const MOVE_SPEED = 8;
 const WORLD_SIZE = 4000;
 
 export default function Page() {
-  const [camera, setCamera] = useState({ x: 0, y: 0 });
-  const [transitioning, setTransitioning] = useState(false);
-  const keysRef = useRef<Set<string>>(new Set());
-  const rafRef = useRef<number>(0);
+  const { camera, transitioning, navigateTo } = usePageNav(WORLD_SIZE);
 
   const data = parseExcalidraw(excalidrawFile);
   const half = WORLD_SIZE / 2;
-
-  // SECTION: Navigation
-
-  const navigateTo = useCallback((x: number, y: number) => {
-    setTransitioning(true);
-    setCamera({ x: -x, y: -y });
-    setTimeout(() => setTransitioning(false), 500);
-  }, []);
-
-  const tick = useCallback(() => {
-    const keys = keysRef.current;
-    let dx = 0,
-      dy = 0;
-    if (keys.has("w") || keys.has("arrowup")) dy += MOVE_SPEED;
-    if (keys.has("s") || keys.has("arrowdown")) dy -= MOVE_SPEED;
-    if (keys.has("a") || keys.has("arrowleft")) dx += MOVE_SPEED;
-    if (keys.has("d") || keys.has("arrowright")) dx -= MOVE_SPEED;
-
-    if (dx || dy) {
-      setCamera((prev) => ({
-        x: Math.max(-half, Math.min(half, prev.x + dx)),
-        y: Math.max(-half, Math.min(half, prev.y + dy)),
-      }));
-    }
-
-    rafRef.current = requestAnimationFrame(tick);
-  }, [half]);
-
-  useEffect(() => {
-    const navKeys = new Set([
-      "w", "a", "s", "d",
-      "arrowup", "arrowdown", "arrowleft", "arrowright",
-    ]);
-    const onDown = (e: KeyboardEvent) => {
-      const k = e.key.toLowerCase();
-      if (navKeys.has(k)) {
-        e.preventDefault();
-        keysRef.current.add(k);
-      }
-    };
-    const onUp = (e: KeyboardEvent) => keysRef.current.delete(e.key.toLowerCase());
-
-    window.addEventListener("keydown", onDown);
-    window.addEventListener("keyup", onUp);
-    rafRef.current = requestAnimationFrame(tick);
-
-    return () => {
-      window.removeEventListener("keydown", onDown);
-      window.removeEventListener("keyup", onUp);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [tick]);
-
-  // SECTION: Render
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#0a0a0a] relative cursor-default">
