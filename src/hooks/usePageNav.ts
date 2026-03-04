@@ -9,6 +9,7 @@ export function usePageNav(worldSize: number) {
   const [transitioning, setTransitioning] = useState(false);
   const keysRef = useRef<Set<string>>(new Set());
   const rafRef = useRef<number>(0);
+  const touchRef = useRef<{ x: number; y: number } | null>(null);
 
   const navigateTo = useCallback((x: number, y: number) => {
     setTransitioning(true);
@@ -57,15 +58,42 @@ export function usePageNav(worldSize: number) {
       }));
     };
 
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 1 || !touchRef.current) return;
+      e.preventDefault();
+      const t = e.touches[0];
+      const dx = t.clientX - touchRef.current.x;
+      const dy = t.clientY - touchRef.current.y;
+      touchRef.current = { x: t.clientX, y: t.clientY };
+      setCamera((prev) => ({
+        x: Math.max(-half, Math.min(half, prev.x + dx)),
+        y: Math.max(-half, Math.min(half, prev.y + dy)),
+      }));
+    };
+    const onTouchEnd = () => {
+      touchRef.current = null;
+    };
+
     window.addEventListener("keydown", onDown);
     window.addEventListener("keyup", onUp);
     window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd);
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener("keydown", onDown);
       window.removeEventListener("keyup", onUp);
       window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
       cancelAnimationFrame(rafRef.current);
     };
   }, [tick]);
