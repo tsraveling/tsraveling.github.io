@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const MOVE_SPEED = 8;
 
-export function usePageNav(worldSize: number) {
+export function useMapNav(worldSize: number) {
   const half = worldSize / 2;
 
   const [camera, setCamera] = useState({ x: 0, y: 0 });

@@ -5,15 +5,15 @@ import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
 import NodeConnection from "@/components/map/NodeConnection";
 import PageNode from "@/components/map/PageNode";
-import { getRadius } from "@/types/mapTypes";
+import { useMapNav } from "@/hooks/useMapNav";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
-import { usePageNav } from "@/hooks/usePageNav";
+import { getRadius } from "@/types/mapTypes";
 import excalidrawFile from "../generated/map.excalidraw.json";
 
 const WORLD_SIZE = 4000;
 
 export default function Page() {
-  const { camera, transitioning, navigateTo } = usePageNav(WORLD_SIZE);
+  const { camera, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
 
   const data = parseExcalidraw(excalidrawFile);
   const half = WORLD_SIZE / 2;
