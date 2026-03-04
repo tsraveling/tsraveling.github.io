@@ -34,7 +34,7 @@ export type LabelData = {
   x: number;
   y: number;
   wrapWidth?: number;
-  variant?: "standard" | "secondary" | "footnote" | "title" | "section";
+  variant?: "standard" | "secondary" | "footnote" | "title" | "subtitle" | "section";
   color?: MapColor;
 };
 

@@ -5,7 +5,8 @@ const VARIANT_CLASSES: Record<NonNullable<LabelData["variant"]>, string> = {
   standard: "text-sm",
   secondary: "text-xs opacity-60",
   footnote: "text-[10px] opacity-40",
-  title: "text-5xl font-semibold",
+  title: "text-3xl font-semibold",
+  subtitle: "text-xl font-semibold",
   section: "text-6xl font-semibold",
 };
 

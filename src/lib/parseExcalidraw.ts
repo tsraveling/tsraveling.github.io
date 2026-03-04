@@ -1,4 +1,4 @@
-import type { Entity, EntityType, Connection, LabelData, MapData, MapColor } from "@/types/mapTypes";
+import type { Connection, Entity, EntityType, LabelData, MapColor, MapData } from "@/types/mapTypes";
 
 type ExcalidrawElement = {
   id: string;
@@ -107,9 +107,10 @@ export function parseExcalidraw(file: ExcalidrawFile): MapData {
       const fontSize = el.fontSize ?? 16;
       const variant = fontSize >= 36 ? "section" as const
         : fontSize >= 28 ? "title" as const
-        : fontSize >= 14 ? "standard" as const
-        : fontSize >= 10 ? "secondary" as const
-        : "footnote" as const;
+          : fontSize >= 20 ? "subtitle" as const
+            : fontSize >= 14 ? "standard" as const
+              : fontSize >= 10 ? "secondary" as const
+                : "footnote" as const;
       const labelColor = mapColorFromHex(el.strokeColor);
       labels.push({
         text: el.text ?? "",

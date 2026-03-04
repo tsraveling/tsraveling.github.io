@@ -53,7 +53,7 @@ export default function HomeNode({ entity }: { entity: Entity }) {
             d="M 48 0 A 48 48 0 0 1 24 41.569"
             fill="none"
             stroke="white"
-            strokeWidth="1.5"
+            strokeWidth="5"
             strokeLinecap="round"
             opacity="0.15"
           />
