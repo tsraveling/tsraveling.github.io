@@ -1,6 +1,7 @@
 "use client";
 
 import DotBackground from "@/components/DotBackground";
+import MapHud from "@/components/MapHud";
 import HomeNode from "@/components/map/HomeNode";
 import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
@@ -10,15 +11,38 @@ import { useMapNav } from "@/hooks/useMapNav";
 import { PARALLAX } from "@/lib/constants";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
 import { getRadius } from "@/types/mapTypes";
+import { useTheme } from "next-themes";
+import { useCallback, useEffect } from "react";
 import excalidrawFile from "../generated/map.excalidraw.json";
 
 const WORLD_SIZE = 4000;
 
 export default function Page() {
   const { camera, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
 
   const data = parseExcalidraw(excalidrawFile);
   const half = WORLD_SIZE / 2;
+
+  const homeEntity = data.entities.find((e) => e.type === "home");
+
+  const goHome = useCallback(() => {
+    if (homeEntity) navigateTo(homeEntity.x, homeEntity.y);
+  }, [homeEntity, navigateTo]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      if (k === "m") {
+        setTheme(isDark ? "light" : "dark");
+      } else if (k === "h") {
+        goHome();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isDark, setTheme, goHome]);
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-background relative cursor-default">
@@ -113,29 +137,7 @@ export default function Page() {
         ))}
       </div>
 
-      {/* HUD */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-3 items-center bg-white/[0.06] backdrop-blur-xl rounded-xl px-5 py-2.5 border border-white/[0.08]" style={{ opacity: 0, animation: "hud-slide-up 600ms cubic-bezier(0.22, 1.2, 0.36, 1) 200ms both" }}>
-        <span className="text-white/40 text-[13px]">Navigate</span>
-        <div className="flex flex-col items-center gap-0.5">
-          <Key label="W" />
-          <div className="flex gap-0.5">
-            <Key label="A" />
-            <Key label="S" />
-            <Key label="D" />
-          </div>
-        </div>
-        <span className="text-white/25 text-xs">
-          ({Math.round(-camera.x)}, {Math.round(-camera.y)})
-        </span>
-      </div>
+      <MapHud isDark={isDark} />
     </div>
-  );
-}
-
-function Key({ label }: { label: string }) {
-  return (
-    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-white/[0.08] border border-white/[0.12] text-white/60 text-[11px] font-semibold font-mono">
-      {label}
-    </span>
   );
 }
