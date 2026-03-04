@@ -1,11 +1,13 @@
 "use client";
 
+import DotBackground from "@/components/DotBackground";
 import HomeNode from "@/components/map/HomeNode";
 import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
 import NodeConnection from "@/components/map/NodeConnection";
 import PageNode from "@/components/map/PageNode";
 import { useMapNav } from "@/hooks/useMapNav";
+import { PARALLAX } from "@/lib/constants";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
 import { getRadius } from "@/types/mapTypes";
 import excalidrawFile from "../generated/map.excalidraw.json";
@@ -19,19 +21,8 @@ export default function Page() {
   const half = WORLD_SIZE / 2;
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-[#0a0a0a] relative cursor-default">
-      {/* Dot grid */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          backgroundPosition: `${camera.x % 40}px ${camera.y % 40}px`,
-          maskImage: "radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)",
-        }}
-      />
+    <div className="w-screen h-screen overflow-hidden bg-background relative cursor-default">
+      <DotBackground offsetX={camera.x * PARALLAX} offsetY={camera.y * PARALLAX} vignette />
 
       {/* World */}
       <div

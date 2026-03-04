@@ -1,8 +1,7 @@
 # MAPPED:
 
-(none)
+- [x] Medieval City Builders: [/city-builders]
 
 # UNMAPPED:
 
-- [ ] Medieval City Builders: [/city-builders]
 - [ ] Notes: Puzzles: [/puzzle-notes]

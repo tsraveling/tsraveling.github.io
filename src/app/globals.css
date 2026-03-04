@@ -74,14 +74,14 @@
 }
 
 :root {
-  --background: 255 255 255; /* white */
-  --background-alt: 243 244 246; /* gray-100 */
-  --background-page: 249 250 251; /* gray-50 */
-  --background-hover: 229 231 235; /* gray-200 */
-  --text: 17 24 39; /* gray-900 */
-  --text-muted: 107 114 128; /* gray-500 */
-  --highlight: 234 179 8; /* yellow-500 */
-  --map-color-white: #ffffff;
+  --background: #030712; /* gray-950 */
+  --background-alt: #0f1822;
+  --background-page: #2a1f1f;
+  --background-hover: #663422;
+  --text: #f5f4f0;
+  --text-muted: #e5e4d9;
+  --highlight: #8b6556;
+  --map-color-white: #f5f4f0;
   --map-color-red: #ff6b6b;
   --map-color-purple: #b197fc;
 }
