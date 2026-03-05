@@ -42,6 +42,7 @@ export default function MapSearch({ entities, onNavigate, onClose, onFocus, onBl
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
+        onBlur();
         onClose();
       }
     };
@@ -60,6 +61,7 @@ export default function MapSearch({ entities, onNavigate, onClose, onFocus, onBl
       e.preventDefault();
       if (results.length > 0) {
         const entity = results[selectedIndex];
+        onBlur();
         onNavigate(entity.x, entity.y);
         onClose();
       }
@@ -80,8 +82,8 @@ export default function MapSearch({ entities, onNavigate, onClose, onFocus, onBl
   }
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[50] w-80">
-      <div className={`${GLASS} rounded-xl overflow-hidden`}>
+    <div className="fixed top-[28px] left-1/2 -translate-x-1/2 z-[50] w-80">
+      <div className={`${GLASS} rounded-xl overflow-hidden [border-color:var(--accent)]`}>
         <input
           ref={inputRef}
           type="text"
@@ -91,23 +93,20 @@ export default function MapSearch({ entities, onNavigate, onClose, onFocus, onBl
             setSelectedIndex(0);
           }}
           onKeyDown={handleKeyDown}
-          placeholder="Search..."
           onFocus={onFocus}
           onBlur={onBlur}
-          className="w-full bg-transparent px-4 py-3 text-[var(--text)] placeholder:text-[var(--text)]/40 outline-none text-sm"
+          className="w-full bg-transparent px-4 py-3 mt-1 text-[var(--text)] text-center outline-none text-sm"
         />
         {results.length > 0 && (
-          <div className="border-t [border-color:var(--glass-border)]">
+          <div className="border-t [border-color:var(--accent)]">
             {results.map((entity, i) => (
               <div
                 key={entity.id}
-                className={`px-4 py-2 text-sm cursor-pointer transition-colors ${
-                  i === selectedIndex
-                    ? "[background-color:var(--glass-bg)]"
-                    : "hover:[background-color:var(--glass-bg)]"
-                }`}
+                className="px-4 py-2 text-sm cursor-pointer transition-colors"
+                style={i === selectedIndex ? { backgroundColor: "color-mix(in srgb, var(--accent) 20%, transparent)" } : undefined}
                 onMouseEnter={() => setSelectedIndex(i)}
                 onClick={() => {
+                  onBlur();
                   onNavigate(entity.x, entity.y);
                   onClose();
                 }}

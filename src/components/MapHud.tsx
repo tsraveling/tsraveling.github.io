@@ -6,23 +6,25 @@ export const GLASS = "backdrop-blur-sm border [background-color:var(--glass-bg)]
 
 interface MapHudProps {
   isDark: boolean;
+  inputActive: boolean;
   onHome: () => void;
   onSearch: () => void;
   onToggleTheme: () => void;
 }
 
-export default function MapHud({ isDark, onHome, onSearch, onToggleTheme }: MapHudProps) {
+export default function MapHud({ isDark, inputActive, onHome, onSearch, onToggleTheme }: MapHudProps) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (inputActive) return;
       if (e.key.toLowerCase() === "t") {
         setExpanded((prev) => !prev);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [inputActive]);
 
   return (
     <div

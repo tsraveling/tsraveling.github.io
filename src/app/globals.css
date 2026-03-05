@@ -86,6 +86,7 @@
   --dot-color: rgba(255, 255, 255, 0.15);
   --glass-bg: rgba(0, 0, 0, 0.8);
   --glass-border: rgba(255, 255, 255, 1);
+  --accent: #a5b4fc;
 }
 
 .light {
@@ -100,6 +101,7 @@
   --dot-color: #8ca3e2;
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 1.0);
+  --accent: #818cf8;
 }
 
 /* Georgia | Caslon | Garamond | Clarendon | Rockwell | Sabon | Trajan */
