@@ -94,12 +94,12 @@ export default function Page() {
                 entity.type === "page" ? <PageNode entity={entity} /> : null;
 
           if (isInteractive) {
+            const isExternal = entity.link!.startsWith("http");
             return (
               <a
                 key={entity.id}
                 href={entity.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="absolute block cursor-pointer group"
                 style={{
                   left: entity.x,
