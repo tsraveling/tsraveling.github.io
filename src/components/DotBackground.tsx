@@ -14,7 +14,7 @@ export default function DotBackground({ offsetX = 0, offsetY = 0, vignette = fal
       className="fixed inset-0 pointer-events-none z-0"
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px)",
+          "radial-gradient(circle, var(--dot-color) 1px, transparent 1px)",
         backgroundSize: `${DOT_SIZE}px ${DOT_SIZE}px`,
         backgroundPosition: `${offsetX % DOT_SIZE}px ${offsetY % DOT_SIZE}px`,
         ...(vignette

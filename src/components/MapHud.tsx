@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const GLASS = "bg-white/[0.06] backdrop-blur-xl border border-white/[0.08]";
+const GLASS = "backdrop-blur-xl border [background-color:var(--glass-bg)] [border-color:var(--glass-border)]";
 
 interface MapHudProps {
   isDark: boolean;
@@ -65,7 +65,7 @@ export default function MapHud({ isDark }: MapHudProps) {
         </div>
 
         <span
-          className={`absolute inset-0 flex items-center justify-center text-white/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0" : "opacity-100"
+          className={`absolute inset-0 flex items-center justify-center text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0" : "opacity-100"
             }`}
         >
           ?
@@ -78,7 +78,7 @@ export default function MapHud({ isDark }: MapHudProps) {
 function HudColumn({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
-      <span className="text-white/40 text-[11px] whitespace-nowrap">{label}</span>
+      <span className="text-[var(--text)]/40 text-[11px] whitespace-nowrap">{label}</span>
       {children}
     </div>
   );
@@ -86,7 +86,7 @@ function HudColumn({ label, children }: { label: string; children: React.ReactNo
 
 function Key({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-white/[0.08] border border-white/[0.12] text-white/60 text-[11px] font-semibold font-mono">
+    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md [background-color:var(--glass-bg)] border [border-color:var(--glass-border)] text-[var(--text)]/60 text-[11px] font-semibold font-mono">
       {label}
     </span>
   );

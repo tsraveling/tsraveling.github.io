@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-background: var(--background);
   --color-background-alt: var(--background-alt);
-  --color-foreground: var(--foreground);
   --font-clarendon: "Clarendon", serif;
 }
 
@@ -74,33 +74,32 @@
 }
 
 :root {
+  /* Dark mode (default) */
   --background: #030712; /* gray-950 */
   --background-alt: #0f1822;
-  --background-page: #2a1f1f;
-  --background-hover: #663422;
   --text: #f5f4f0;
-  --text-muted: #e5e4d9;
+  --text-muted: #a1a1aa;
   --highlight: #8b6556;
   --map-color-white: #f5f4f0;
   --map-color-red: #ff6b6b;
   --map-color-purple: #b197fc;
+  --dot-color: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] {
-  /* Dark theme */
-  --background: #0f1822ff;
-  --background-alt: #0f1822ff;
-  --background-page: #2a1f1fff;
-  --background-hover: #663422ff;
-  --text: #f5f4f0;
-  --text-muted: #e5e4d9;
-  --highlight: #8b6556ff;
-}
-
-[data-theme="light"] {
-  --map-color-white: #1f2937;
+.light {
+  --background: #f9fafb; /* gray-50 */
+  --background-alt: #f3f4f6; /* gray-100 */
+  --text: #111827; /* gray-900 */
+  --text-muted: #6b7280; /* gray-500 */
+  --highlight: #d97706;
+  --map-color-white: #1f2937; /* gray-800 */
   --map-color-red: #c92a2a;
   --map-color-purple: #5f3dc4;
+  --dot-color: rgba(0, 0, 0, 0.12);
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.1);
 }
 
 /* Georgia | Caslon | Garamond | Clarendon | Rockwell | Sabon | Trajan */
