@@ -59,6 +59,12 @@ export default function MapHud({ isDark }: MapHudProps) {
           <HudColumn label={isDark ? "Light Mode" : "Dark Mode"}>
             <Key label="M" />
           </HudColumn>
+          <HudColumn label="Zoom">
+            <div className="flex gap-0.5">
+              <Key label="+" />
+              <Key label="-" />
+            </div>
+          </HudColumn>
           <HudColumn label="Hints">
             <Key label="T" />
           </HudColumn>

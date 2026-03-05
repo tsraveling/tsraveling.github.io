@@ -18,7 +18,7 @@ import excalidrawFile from "../generated/map.excalidraw.json";
 const WORLD_SIZE = 4000;
 
 export default function Page() {
-  const { camera, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
+  const { camera, zoom, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
 
@@ -52,7 +52,7 @@ export default function Page() {
       <div
         className="absolute left-1/2 top-1/2 will-change-transform"
         style={{
-          transform: `translate(${camera.x}px, ${camera.y}px)`,
+          transform: `translate(${camera.x}px, ${camera.y}px) scale(${zoom})`,
           transition: transitioning ? "transform 500ms cubic-bezier(0.22, 1.2, 0.36, 1)" : "none",
         }}
       >
