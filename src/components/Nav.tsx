@@ -1,6 +1,8 @@
 "use client";
 import { useTheme } from "next-themes";
-import React, { useSyncExternalStore } from "react";
+import React, { useCallback, useState, useSyncExternalStore } from "react";
+import { useClipboard } from "@/hooks/useClipboard";
+import { useShare } from "@/hooks/useShare";
 import {
   BlueSkyIcon,
   BookmarkIcon,
@@ -44,6 +46,9 @@ interface NavProps {
   showOnlyOnHover?: boolean;
 }
 
+const SHARE_LABEL = "Share";
+const SHARE_COPIED_LABEL = "URL Copied!";
+
 const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -51,11 +56,25 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
     () => false,
   );
   const { theme, setTheme } = useTheme();
+  const [shareLabel, setShareLabel] = useState(SHARE_LABEL);
+  const share = useShare();
+  const clip = useClipboard();
 
   const toggleTheme = () => {
     if (!mounted) return;
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  const handleShare = useCallback(async () => {
+    const url = window.location.href;
+    const result = await share(url);
+    if ("error" in result) return;
+    if (result.status === "WEB") {
+      setShareLabel(SHARE_COPIED_LABEL);
+      await clip(url);
+      setShareLabel(SHARE_LABEL);
+    }
+  }, [share, clip]);
 
   const iconClasses = "size-5 transition-all";
 
@@ -69,9 +88,10 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
       <NavIconLink href="/" label="Home">
         <HomeIcon className={iconClasses} />
       </NavIconLink>
-      <NavIconLink href="/" label="Share">
+      <button className={buttonClasses} onClick={handleShare}>
         <BookmarkIcon className={iconClasses} />
-      </NavIconLink>
+        <Tooltip label={shareLabel} />
+      </button>
       <NavIconLink href="/" label="Comment on BlueSky">
         <BlueSkyIcon className={iconClasses} />
       </NavIconLink>
