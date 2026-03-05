@@ -7,10 +7,11 @@ export const GLASS = "backdrop-blur-sm border [background-color:var(--glass-bg)]
 interface MapHudProps {
   isDark: boolean;
   onHome: () => void;
+  onSearch: () => void;
   onToggleTheme: () => void;
 }
 
-export default function MapHud({ isDark, onHome, onToggleTheme }: MapHudProps) {
+export default function MapHud({ isDark, onHome, onSearch, onToggleTheme }: MapHudProps) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function MapHud({ isDark, onHome, onToggleTheme }: MapHudProps) {
           <HudColumn label="Home" onClick={onHome}>
             <Key label="H" />
           </HudColumn>
-          <HudColumn label="Search" onClick={() => {}}>
+          <HudColumn label="Search" onClick={onSearch}>
             <Key label="/" />
           </HudColumn>
           <HudColumn label={isDark ? "Light Mode" : "Dark Mode"} onClick={onToggleTheme}>

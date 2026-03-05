@@ -7,10 +7,11 @@ const btnClasses = `${GLASS} rounded-md px-3 py-1.5 text-[var(--text)]/60 text-[
 interface MobileHudProps {
   isDark: boolean;
   onHome: () => void;
+  onSearch: () => void;
   onToggleTheme: () => void;
 }
 
-export default function MobileHud({ isDark, onHome, onToggleTheme }: MobileHudProps) {
+export default function MobileHud({ isDark, onHome, onSearch, onToggleTheme }: MobileHudProps) {
   return (
     <div
       className="fixed bottom-6 left-1/2 -translate-x-1/2 md:hidden z-[50]"
@@ -23,7 +24,7 @@ export default function MobileHud({ isDark, onHome, onToggleTheme }: MobileHudPr
         <button className={btnClasses} onClick={onHome}>
           Home
         </button>
-        <button className={btnClasses} onClick={() => { }}>
+        <button className={btnClasses} onClick={onSearch}>
           Search
         </button>
         <button className={btnClasses} onClick={onToggleTheme}>

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const MOVE_SPEED = 8;
 
-export function useMapNav(worldSize: number) {
+export function useMapNav(worldSize: number, inputActive = false) {
   const half = worldSize / 2;
 
   const [camera, setCamera] = useState({ x: 0, y: 0 });
@@ -45,6 +45,7 @@ export function useMapNav(worldSize: number) {
     ]);
     const ZOOM_STEP = 0.05;
     const onDown = (e: KeyboardEvent) => {
+      if (inputActive) return;
       const k = e.key.toLowerCase();
       if (k === "=" || k === "+") {
         e.preventDefault();
@@ -61,7 +62,9 @@ export function useMapNav(worldSize: number) {
         keysRef.current.add(k);
       }
     };
-    const onUp = (e: KeyboardEvent) => keysRef.current.delete(e.key.toLowerCase());
+    const onUp = (e: KeyboardEvent) => {
+      keysRef.current.delete(e.key.toLowerCase());
+    };
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -132,7 +135,7 @@ export function useMapNav(worldSize: number) {
       window.removeEventListener("touchend", onTouchEnd);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [tick]);
+  }, [tick, inputActive]);
 
   return { camera, zoom, transitioning, navigateTo };
 }

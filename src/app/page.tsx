@@ -2,28 +2,32 @@
 
 import DotBackground from "@/components/DotBackground";
 import MapHud from "@/components/MapHud";
+import MapSearch from "@/components/MapSearch";
 import MobileHud from "@/components/MobileHud";
 import HomeNode from "@/components/map/HomeNode";
 import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
 import NodeConnection from "@/components/map/NodeConnection";
 import PageNode from "@/components/map/PageNode";
+import { useInputActive } from "@/hooks/useInputActive";
 import { useMapNav } from "@/hooks/useMapNav";
 import { PARALLAX } from "@/lib/constants";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
 import { getRadius } from "@/types/mapTypes";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "next-themes";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import excalidrawFile from "../generated/map.excalidraw.json";
 
 const WORLD_SIZE = 4000;
 
 export default function Page() {
-  const { camera, zoom, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
+  const { inputActive, register, unregister } = useInputActive();
+  const { camera, zoom, transitioning, navigateTo } = useMapNav(WORLD_SIZE, inputActive);
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
   const isMobile = useIsMobile();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const data = parseExcalidraw(excalidrawFile);
   const half = WORLD_SIZE / 2;
@@ -36,16 +40,20 @@ export default function Page() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (inputActive) return;
       const k = e.key.toLowerCase();
       if (k === "m") {
         setTheme(isDark ? "light" : "dark");
       } else if (k === "h") {
         goHome();
+      } else if (e.key === "/") {
+        e.preventDefault();
+        setSearchOpen(true);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [isDark, setTheme, goHome]);
+  }, [isDark, setTheme, goHome, inputActive]);
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-background relative cursor-default">
@@ -140,14 +148,28 @@ export default function Page() {
         ))}
       </div>
 
+      {searchOpen && (
+        <MapSearch
+          entities={data.entities}
+          onNavigate={(x, y) => {
+            navigateTo(x, y);
+            setSearchOpen(false);
+          }}
+          onClose={() => setSearchOpen(false)}
+          onFocus={register}
+          onBlur={unregister}
+        />
+      )}
+
       {isMobile ? (
         <MobileHud
           isDark={isDark}
           onHome={goHome}
+          onSearch={() => setSearchOpen(true)}
           onToggleTheme={() => setTheme(isDark ? "light" : "dark")}
         />
       ) : (
-        <MapHud isDark={isDark} onHome={goHome} onToggleTheme={() => setTheme(isDark ? "light" : "dark")} />
+        <MapHud isDark={isDark} onHome={goHome} onSearch={() => setSearchOpen(true)} onToggleTheme={() => setTheme(isDark ? "light" : "dark")} />
       )}
     </div>
   );
