@@ -14,7 +14,7 @@ export default function Label({ label }: { label: LabelData }) {
   const variant = label.variant ?? "standard";
   return (
     <div
-      className={`absolute select-none pointer-events-none ${VARIANT_CLASSES[variant]}`}
+      className={`absolute ${VARIANT_CLASSES[variant]}`}
       style={{
         left: label.x,
         top: label.y,
