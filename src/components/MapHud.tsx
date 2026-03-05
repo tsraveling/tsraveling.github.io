@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const GLASS = "backdrop-blur-xl border [background-color:var(--glass-bg)] [border-color:var(--glass-border)]";
+export const GLASS = "backdrop-blur-sm border [background-color:var(--glass-bg)] [border-color:var(--glass-border)]";
 
 interface MapHudProps {
   isDark: boolean;
@@ -84,7 +84,7 @@ export default function MapHud({ isDark }: MapHudProps) {
 function HudColumn({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
-      <span className="text-[var(--text)]/40 text-[11px] whitespace-nowrap">{label}</span>
+      <span className="text-[11px] whitespace-nowrap">{label}</span>
       {children}
     </div>
   );

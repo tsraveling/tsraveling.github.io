@@ -84,8 +84,8 @@
   --map-color-red: #ff6b6b;
   --map-color-purple: #b197fc;
   --dot-color: rgba(255, 255, 255, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(0, 0, 0, 0.8);
+  --glass-border: rgba(255, 255, 255, 1);
 }
 
 .light {
@@ -98,8 +98,8 @@
   --map-color-red: #c92a2a;
   --map-color-purple: #5f3dc4;
   --dot-color: #8ca3e2;
-  --glass-bg: rgba(0, 0, 0, 0.05);
-  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 1.0);
 }
 
 /* Georgia | Caslon | Garamond | Clarendon | Rockwell | Sabon | Trajan */

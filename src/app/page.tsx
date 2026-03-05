@@ -2,6 +2,7 @@
 
 import DotBackground from "@/components/DotBackground";
 import MapHud from "@/components/MapHud";
+import MobileHud from "@/components/MobileHud";
 import HomeNode from "@/components/map/HomeNode";
 import JunctionNode from "@/components/map/JunctionNode";
 import Label from "@/components/map/Label";
@@ -11,6 +12,7 @@ import { useMapNav } from "@/hooks/useMapNav";
 import { PARALLAX } from "@/lib/constants";
 import { parseExcalidraw } from "@/lib/parseExcalidraw";
 import { getRadius } from "@/types/mapTypes";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "next-themes";
 import { useCallback, useEffect } from "react";
 import excalidrawFile from "../generated/map.excalidraw.json";
@@ -21,6 +23,7 @@ export default function Page() {
   const { camera, zoom, transitioning, navigateTo } = useMapNav(WORLD_SIZE);
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
+  const isMobile = useIsMobile();
 
   const data = parseExcalidraw(excalidrawFile);
   const half = WORLD_SIZE / 2;
@@ -137,7 +140,15 @@ export default function Page() {
         ))}
       </div>
 
-      <MapHud isDark={isDark} />
+      {isMobile ? (
+        <MobileHud
+          isDark={isDark}
+          onHome={goHome}
+          onToggleTheme={() => setTheme(isDark ? "light" : "dark")}
+        />
+      ) : (
+        <MapHud isDark={isDark} />
+      )}
     </div>
   );
 }
