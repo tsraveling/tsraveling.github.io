@@ -9,7 +9,7 @@ interface MapHudProps {
 }
 
 export default function MapHud({ isDark }: MapHudProps) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -31,8 +31,8 @@ export default function MapHud({ isDark }: MapHudProps) {
     >
       <div
         className={`relative overflow-hidden transition-all duration-300 ease-out ${GLASS} ${expanded
-            ? "max-w-lg max-h-32 rounded-xl px-5 py-3"
-            : "max-w-9 max-h-9 rounded-[18px] cursor-pointer"
+          ? "max-w-lg max-h-32 rounded-xl px-5 py-3"
+          : "max-w-9 max-h-9 rounded-[18px] cursor-pointer"
           }`}
         onClick={!expanded ? () => setExpanded(true) : undefined}
       >

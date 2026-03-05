@@ -11,7 +11,7 @@ export default function HomeNode({ entity }: { entity: Entity }) {
       />
       {/* Orbiting arc segments */}
       <svg
-        className="absolute pointer-events-none"
+        className="absolute pointer-events-none text-black dark:text-white"
         style={{
           width: diameter + 16,
           height: diameter + 16,
@@ -33,7 +33,7 @@ export default function HomeNode({ entity }: { entity: Entity }) {
           <path
             d="M 48 0 A 48 48 0 0 1 0 48"
             fill="none"
-            stroke="white"
+            stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
             opacity="0.2"
@@ -52,7 +52,7 @@ export default function HomeNode({ entity }: { entity: Entity }) {
           <path
             d="M 48 0 A 48 48 0 0 1 24 41.569"
             fill="none"
-            stroke="white"
+            stroke="currentColor"
             strokeWidth="5"
             strokeLinecap="round"
             opacity="0.15"
@@ -71,7 +71,7 @@ export default function HomeNode({ entity }: { entity: Entity }) {
           <path
             d="M 48 0 A 48 48 0 0 1 33.941 33.941"
             fill="none"
-            stroke="white"
+            stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
             opacity="0.1"

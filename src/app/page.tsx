@@ -109,7 +109,7 @@ export default function Page() {
                   height: radius * 2,
                 }}
               >
-                <div className="transition-[filter] duration-200 group-hover:[filter:drop-shadow(0_0_16px_rgba(255,255,255,0.3))]">
+                <div className="transition-[filter] duration-200 group-hover:drop-shadow-[0_0_16px_rgba(0,0,0,0.7)] dark:group-hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.3)]">
                   {nodeContent}
                 </div>
               </a>

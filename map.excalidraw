@@ -1032,10 +1032,10 @@
     {
       "id": "7hgs2EXXpt3LzPA1r4ZNc",
       "type": "text",
-      "x": -540.1849827517441,
-      "y": -60.08735762244797,
-      "width": 367.94896716590944,
-      "height": 141.00296120210788,
+      "x": -566.1619434673001,
+      "y": -108.75869136238518,
+      "width": 382.1996049369856,
+      "height": 225,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1049,15 +1049,15 @@
       "index": "ar",
       "roundness": null,
       "seed": 125742305,
-      "version": 2715,
-      "versionNonce": 1592714319,
+      "version": 2860,
+      "versionNonce": 344933247,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1772497351394,
+      "updated": 1772727273329,
       "link": null,
       "locked": false,
-      "text": "I'm a writer, a game designer, and an artist. Find\nme in the normal online places to the east; check\nout my open source contributions and tools off of\nthe Github node to the southeast. I think and write\na lot about the human world, systems, and the\nplace they tend to interact (politics); writing on\nthese topics will be attached here soon enough.",
-      "fontSize": 16.114624137383757,
+      "text": "I'm a writer, a game designer, and an\nartist. Find me in the normal online places\nto the east; check out my open source\ncontributions and tools off of the Github\nnode to the southeast. I think and write a\nlot about the human world, systems, and\nthe place they tend to interact (politics);\nwriting on these topics will be attached\nhere soon enough.",
+      "fontSize": 20,
       "fontFamily": 6,
       "textAlign": "left",
       "verticalAlign": "top",
@@ -1375,6 +1375,65 @@
       "originalText": "City Builders",
       "autoResize": true,
       "lineHeight": 1.25
+    },
+    {
+      "id": "rvGqNYvh0G1mWrqoXA0Fi",
+      "type": "arrow",
+      "x": -458.7043946052422,
+      "y": 36.2695563868341,
+      "width": 45.75565227355844,
+      "height": 60.451469597387074,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "b00",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 5744433,
+      "version": 41,
+      "versionNonce": 1887577041,
+      "isDeleted": true,
+      "boundElements": null,
+      "updated": 1772727268092,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -45.75565227355844,
+          -60.451469597387074
+        ]
+      ],
+      "startBinding": {
+        "elementId": "7hgs2EXXpt3LzPA1r4ZNc",
+        "mode": "inside",
+        "fixedPoint": [
+          0.22187080842002846,
+          0.42894871406753343
+        ]
+      },
+      "endBinding": {
+        "elementId": "7hgs2EXXpt3LzPA1r4ZNc",
+        "mode": "inside",
+        "fixedPoint": [
+          0.09751755197257372,
+          0.16027551585692423
+        ]
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
     }
   ],
   "appState": {

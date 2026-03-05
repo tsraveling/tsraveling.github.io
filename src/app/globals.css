@@ -97,7 +97,7 @@
   --map-color-white: #1f2937; /* gray-800 */
   --map-color-red: #c92a2a;
   --map-color-purple: #5f3dc4;
-  --dot-color: rgba(0, 0, 0, 0.12);
+  --dot-color: #8ca3e2;
   --glass-bg: rgba(0, 0, 0, 0.05);
   --glass-border: rgba(0, 0, 0, 0.1);
 }
