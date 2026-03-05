@@ -3,7 +3,7 @@ import { useCallback } from "react";
 const COMPOSE_URL = "https://bsky.app/intent/compose";
 
 function isMobile() {
-  return navigator.share && /Mobi|Android/i.test(navigator.userAgent);
+  return !!navigator.share && /Mobi|Android/i.test(navigator.userAgent);
 }
 
 export function useBluesky() {
