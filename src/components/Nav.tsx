@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import React, { useCallback, useState, useSyncExternalStore } from "react";
 import { useClipboard } from "@/hooks/useClipboard";
 import { useShare } from "@/hooks/useShare";
+import { useBluesky } from "@/hooks/useBluesky";
 import {
   BlueSkyIcon,
   BookmarkIcon,
@@ -59,6 +60,7 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
   const [shareLabel, setShareLabel] = useState(SHARE_LABEL);
   const share = useShare();
   const clip = useClipboard();
+  const { shareBs } = useBluesky();
 
   const toggleTheme = () => {
     if (!mounted) return;
@@ -92,9 +94,13 @@ const Nav: React.FC<NavProps> = ({ showOnlyOnHover = true }) => {
         <BookmarkIcon className={iconClasses} />
         <Tooltip label={shareLabel} />
       </button>
-      <NavIconLink href="/" label="Comment on BlueSky">
+      <button
+        className={buttonClasses}
+        onClick={() => shareBs(window.location.href)}
+      >
         <BlueSkyIcon className={iconClasses} />
-      </NavIconLink>
+        <Tooltip label="Comment on BlueSky" />
+      </button>
       <button
         className={buttonClasses}
         onClick={toggleTheme}

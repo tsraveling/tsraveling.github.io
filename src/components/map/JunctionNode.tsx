@@ -13,7 +13,7 @@ export default function JunctionNode({ entity }: { entity: Entity }) {
         />
         {/* Content — stays static */}
         <span
-          className="text-xs font-semibold whitespace-nowrap px-3 pt-1 relative"
+          className="text-xs font-semibold whitespace-nowrap px-3 pt-2 relative"
           style={{ color: CONNECTION_COLOR }}
         >
           {entity.title}

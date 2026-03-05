@@ -21,7 +21,7 @@ export default function PageNode({ entity }: { entity: Entity }) {
         )}
         {entity.title && (
           <span
-            className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold text-center z-10 px-2 pt-1"
+            className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold text-center z-10 px-2 pt-2"
           >
             <span style={{ maxWidth: diameter * 0.7 }}>{entity.title}</span>
           </span>

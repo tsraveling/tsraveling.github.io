@@ -76,7 +76,7 @@ export default function MapHud({ isDark, inputActive, onHome, onSearch, onToggle
         </div>
 
         <span
-          className={`absolute inset-0 flex items-center justify-center text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0 pointer-events-none" : "opacity-100"
+          className={`absolute inset-0 flex items-center justify-center pt-1 text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
         >
           ?
