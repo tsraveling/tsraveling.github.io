@@ -24,8 +24,8 @@ const Page: React.FC<PageProps> = ({ title, date, className, children }) => {
 
   return (
     <main className={className}>
-      <article className="prose prose-lg prose-stone dark:prose-invert max-w-3xl md:prose-p:leading-loose md:prose-ul:leading-loose md:prose-ol:leading-loose transition-all">
-        <h1 className="md:mt-10 pb-1 bg-indigo-200 dark:bg-transparent dark:border-solid dark:border-b-2 dark: border-indigo-400 mb-2">
+      <article className="prose dark:prose-invert prose-lg max-w-3xl md:prose-p:leading-loose md:prose-ul:leading-loose md:prose-ol:leading-loose transition-all">
+        <h1 className="md:mt-10 pb-1 border-solid border-b-2 [border-color:var(--accent)] mb-2">
           {title}
         </h1>
         <div className="w-full flex italic mb-6">

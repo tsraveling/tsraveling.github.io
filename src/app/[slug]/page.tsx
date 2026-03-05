@@ -37,8 +37,9 @@ export default async function Post({ params }: PostProps) {
 
   const components: Partial<Components> = {
     pre: ({ children }: CodeProps) => {
-      const { className, children: codeString } =
-        (children as ReactElement)?.props ?? {};
+      const childProps =
+        (children as ReactElement<{ className?: string; children?: React.ReactNode }>)?.props ?? {};
+      const { className, children: codeString } = childProps;
       const match = /language-(\w+)/.exec(className || "");
       const language = match ? match[1] : "";
 

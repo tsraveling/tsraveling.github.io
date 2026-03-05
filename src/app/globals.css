@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --font-clarendon: "Clarendon", serif;
+}
 
 @font-face {
   font-family: "Clarendon Regular";
@@ -68,24 +74,34 @@
 }
 
 :root {
-  --background: 255 255 255; /* white */
-  --background-alt: 243 244 246; /* gray-100 */
-  --background-page: 249 250 251; /* gray-50 */
-  --background-hover: 229 231 235; /* gray-200 */
-  --text: 17 24 39; /* gray-900 */
-  --text-muted: 107 114 128; /* gray-500 */
-  --highlight: 234 179 8; /* yellow-500 */
+  /* Dark mode (default) */
+  --background: #030712; /* gray-950 */
+  --background-alt: #0f1822;
+  --text: #f5f4f0;
+  --text-muted: #a1a1aa;
+  --highlight: #8b6556;
+  --map-color-white: #f5f4f0;
+  --map-color-red: #ff6b6b;
+  --map-color-purple: #b197fc;
+  --dot-color: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(0, 0, 0, 0.8);
+  --glass-border: rgba(255, 255, 255, 1);
+  --accent: #a5b4fc;
 }
 
-[data-theme="dark"] {
-  /* Dark theme */
-  --background: #0f1822ff;
-  --background-alt: #0f1822ff;
-  --background-page: #2a1f1fff;
-  --background-hover: #663422ff;
-  --text: #f5f4f0;
-  --text-muted: #e5e4d9;
-  --highlight: #8b6556ff;
+.light {
+  --background: #f9fafb; /* gray-50 */
+  --background-alt: #f3f4f6; /* gray-100 */
+  --text: #111827; /* gray-900 */
+  --text-muted: #6b7280; /* gray-500 */
+  --highlight: #d97706;
+  --map-color-white: #1f2937; /* gray-800 */
+  --map-color-red: #c92a2a;
+  --map-color-purple: #5f3dc4;
+  --dot-color: #8ca3e2;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 1.0);
+  --accent: #818cf8;
 }
 
 /* Georgia | Caslon | Garamond | Clarendon | Rockwell | Sabon | Trajan */
@@ -94,4 +110,15 @@ body {
   color: var(--text);
   background: var(--background);
   font-family: "Rockwell", sans-serif;
+}
+
+@keyframes hud-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

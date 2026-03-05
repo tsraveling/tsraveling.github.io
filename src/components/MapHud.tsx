@@ -1,0 +1,107 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+export const GLASS = "backdrop-blur-sm border [background-color:var(--glass-bg)] [border-color:var(--glass-border)]";
+
+interface MapHudProps {
+  isDark: boolean;
+  inputActive: boolean;
+  onHome: () => void;
+  onSearch: () => void;
+  onToggleTheme: () => void;
+}
+
+export default function MapHud({ isDark, inputActive, onHome, onSearch, onToggleTheme }: MapHudProps) {
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (inputActive) return;
+      if (e.key.toLowerCase() === "t") {
+        setExpanded((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [inputActive]);
+
+  return (
+    <div
+      className="fixed bottom-6 left-1/2 -translate-x-1/2"
+      style={{
+        opacity: 0,
+        animation: "hud-slide-up 600ms cubic-bezier(0.22, 1.2, 0.36, 1) 200ms both",
+      }}
+    >
+      <div
+        className={`relative overflow-hidden transition-all duration-300 ease-out ${GLASS} ${expanded
+          ? "max-w-lg max-h-32 rounded-xl px-5 py-3"
+          : "max-w-9 max-h-9 rounded-[18px] cursor-pointer"
+          }`}
+        onClick={!expanded ? () => setExpanded(true) : () => setExpanded(false)}
+      >
+        <div
+          className={`flex gap-6 items-start whitespace-nowrap transition-opacity duration-200 ${expanded ? "opacity-100" : "opacity-0"
+            }`}
+        >
+          <HudColumn label="Navigate">
+            <div className="flex flex-col items-center gap-0.5">
+              <Key label="W" />
+              <div className="flex gap-0.5">
+                <Key label="A" />
+                <Key label="S" />
+                <Key label="D" />
+              </div>
+            </div>
+          </HudColumn>
+          <HudColumn label="Home" onClick={onHome}>
+            <Key label="H" />
+          </HudColumn>
+          <HudColumn label="Search" onClick={onSearch}>
+            <Key label="/" />
+          </HudColumn>
+          <HudColumn label={isDark ? "Light Mode" : "Dark Mode"} onClick={onToggleTheme}>
+            <Key label="M" />
+          </HudColumn>
+          <HudColumn label="Zoom">
+            <div className="flex gap-0.5">
+              <Key label="+" />
+              <Key label="-" />
+            </div>
+          </HudColumn>
+          <HudColumn label="Hints">
+            <Key label="T" />
+          </HudColumn>
+        </div>
+
+        <span
+          className={`absolute inset-0 flex items-center justify-center pt-1 text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+        >
+          ?
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function HudColumn({ label, children, onClick }: { label: string; children: React.ReactNode; onClick?: () => void }) {
+  return (
+    <div
+      className={`flex flex-col items-center gap-1.5 ${onClick ? "cursor-pointer group/key" : ""}`}
+      onClick={onClick ? (e) => { e.stopPropagation(); onClick(); } : undefined}
+    >
+      <span className="text-[11px] whitespace-nowrap">{label}</span>
+      {children}
+    </div>
+  );
+}
+
+function Key({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md [background-color:var(--glass-bg)] border [border-color:var(--glass-border)] text-[var(--text)]/60 text-[11px] font-semibold font-mono transition-[border-width] duration-150 group-hover/key:border-2">
+      {label}
+    </span>
+  );
+}
