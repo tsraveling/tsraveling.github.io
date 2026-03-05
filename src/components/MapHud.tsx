@@ -6,9 +6,11 @@ export const GLASS = "backdrop-blur-sm border [background-color:var(--glass-bg)]
 
 interface MapHudProps {
   isDark: boolean;
+  onHome: () => void;
+  onToggleTheme: () => void;
 }
 
-export default function MapHud({ isDark }: MapHudProps) {
+export default function MapHud({ isDark, onHome, onToggleTheme }: MapHudProps) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function MapHud({ isDark }: MapHudProps) {
           ? "max-w-lg max-h-32 rounded-xl px-5 py-3"
           : "max-w-9 max-h-9 rounded-[18px] cursor-pointer"
           }`}
-        onClick={!expanded ? () => setExpanded(true) : undefined}
+        onClick={!expanded ? () => setExpanded(true) : () => setExpanded(false)}
       >
         <div
           className={`flex gap-6 items-start whitespace-nowrap transition-opacity duration-200 ${expanded ? "opacity-100" : "opacity-0"
@@ -50,13 +52,13 @@ export default function MapHud({ isDark }: MapHudProps) {
               </div>
             </div>
           </HudColumn>
-          <HudColumn label="Home">
+          <HudColumn label="Home" onClick={onHome}>
             <Key label="H" />
           </HudColumn>
-          <HudColumn label="Search">
+          <HudColumn label="Search" onClick={() => {}}>
             <Key label="/" />
           </HudColumn>
-          <HudColumn label={isDark ? "Light Mode" : "Dark Mode"}>
+          <HudColumn label={isDark ? "Light Mode" : "Dark Mode"} onClick={onToggleTheme}>
             <Key label="M" />
           </HudColumn>
           <HudColumn label="Zoom">
@@ -71,7 +73,7 @@ export default function MapHud({ isDark }: MapHudProps) {
         </div>
 
         <span
-          className={`absolute inset-0 flex items-center justify-center text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0" : "opacity-100"
+          className={`absolute inset-0 flex items-center justify-center text-[var(--text)]/40 text-sm font-semibold transition-opacity duration-200 ${expanded ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
         >
           ?
@@ -81,9 +83,12 @@ export default function MapHud({ isDark }: MapHudProps) {
   );
 }
 
-function HudColumn({ label, children }: { label: string; children: React.ReactNode }) {
+function HudColumn({ label, children, onClick }: { label: string; children: React.ReactNode; onClick?: () => void }) {
   return (
-    <div className="flex flex-col items-center gap-1.5">
+    <div
+      className={`flex flex-col items-center gap-1.5 ${onClick ? "cursor-pointer group/key" : ""}`}
+      onClick={onClick ? (e) => { e.stopPropagation(); onClick(); } : undefined}
+    >
       <span className="text-[11px] whitespace-nowrap">{label}</span>
       {children}
     </div>
@@ -92,7 +97,7 @@ function HudColumn({ label, children }: { label: string; children: React.ReactNo
 
 function Key({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md [background-color:var(--glass-bg)] border [border-color:var(--glass-border)] text-[var(--text)]/60 text-[11px] font-semibold font-mono">
+    <span className="inline-flex items-center justify-center w-7 h-7 rounded-md [background-color:var(--glass-bg)] border [border-color:var(--glass-border)] text-[var(--text)]/60 text-[11px] font-semibold font-mono transition-[border-width] duration-150 group-hover/key:border-2">
       {label}
     </span>
   );

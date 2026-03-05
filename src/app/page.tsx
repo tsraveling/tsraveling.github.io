@@ -147,7 +147,7 @@ export default function Page() {
           onToggleTheme={() => setTheme(isDark ? "light" : "dark")}
         />
       ) : (
-        <MapHud isDark={isDark} />
+        <MapHud isDark={isDark} onHome={goHome} onToggleTheme={() => setTheme(isDark ? "light" : "dark")} />
       )}
     </div>
   );
