@@ -1,6 +1,7 @@
 ## BACKLOG
 
 - Add a working solar system model
+- Add a cooler rotating set of inked drawings to the home node
 
 ## FIXES
 
